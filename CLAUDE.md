@@ -23,7 +23,7 @@ node --test ruta/al/fichero.test.js    # un solo fichero de test
 node --test --test-name-pattern="..."  # un solo test por nombre
 ```
 
-No hay linter ni build. Aún no existen tests.
+No hay linter ni build. Los tests de caracterización están en [pruebas/](pruebas/LEEME.md) (no en `test/`: `node --test` ejecutaría como test cualquier `.js` de una carpeta `test/`). No necesitan `node_modules`: sustituyen `db.js` y `express` por dobles en memoria y lanzan la remesa real en un proceso hijo. Golden master del ciclo de la factura en [pruebas/golden-master/](pruebas/golden-master/LEEME.md); solo se regenera con una decisión de negocio escrita.
 
 **Aislar la BD al probar**: `config.RUTA_BD` es `./datos/gesfact.db`, relativa al **directorio de trabajo**, no al código. Si se lanza `node <ruta>/server.js` o el script de remesa desde un directorio temporal, se usa (y se crea) `datos/gesfact.db` ahí. Si la BD está vacía, `db.inicializar()` crea el esquema y carga los datos semilla. Así se prueba desde fuera sin tocar el código. El puerto 3000 está fijo, así que no se pueden levantar dos servidores a la vez.
 

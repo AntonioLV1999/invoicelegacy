@@ -1,0 +1,2445 @@
+{
+  "casos": {
+    "GM-01": {
+      "ejercita": [
+        "RN-01",
+        "RN-02",
+        "RN-03",
+        "RN-06",
+        "RN-24",
+        "ANO-013"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "1",
+            "2",
+            "1",
+            "0,44"
+          ],
+          "cliente_id": "1",
+          "desc": [
+            "Alquiler máquina de café Futurmat F3 (enero)",
+            "Café en grano natural 1kg",
+            "Azúcar blanquilla 10kg",
+            "Vaso caña 20cl (caja 72)"
+          ],
+          "fecha": "2026-01-31",
+          "iva": [
+            "21",
+            "10",
+            "10",
+            "21"
+          ],
+          "obs": "Remesa enero",
+          "precio": [
+            "90,00",
+            "11,95",
+            "9,80",
+            "21,60"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a laparada@gmail.com"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 133.2,
+            "cliente_id": 1,
+            "estado": "emitida",
+            "fecha": "2026-01-31",
+            "id": 10,
+            "iva": 24.27,
+            "numero": "FA-2026-000109",
+            "observaciones": "Remesa enero",
+            "recargo": 0,
+            "serie": "FA",
+            "total": 157.47,
+            "vencimiento": "2026-03-02"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 90,
+            "cantidad": 1,
+            "cuota_iva": 18.9,
+            "cuota_recargo": 0,
+            "descripcion": "Alquiler máquina de café Futurmat F3 (enero)",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 90,
+            "tipo_iva": 21
+          },
+          {
+            "base": 23.9,
+            "cantidad": 2,
+            "cuota_iva": 2.39,
+            "cuota_recargo": 0,
+            "descripcion": "Café en grano natural 1kg",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 11.95,
+            "tipo_iva": 10
+          },
+          {
+            "base": 9.8,
+            "cantidad": 1,
+            "cuota_iva": 0.98,
+            "cuota_recargo": 0,
+            "descripcion": "Azúcar blanquilla 10kg",
+            "factura_id": 10,
+            "id": 31,
+            "precio": 9.8,
+            "tipo_iva": 10
+          },
+          {
+            "base": 9.5,
+            "cantidad": 0.44,
+            "cuota_iva": 2,
+            "cuota_recargo": 0,
+            "descripcion": "Vaso caña 20cl (caja 72)",
+            "factura_id": 10,
+            "id": 32,
+            "precio": 21.6,
+            "tipo_iva": 21
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "31/01/2026",
+            "lineaCSV": "FA-2026-000109;31/01/2026;Cafetería La Parada, S.C.;J45771102;133,20;24,27;0,00;157,47;emitida",
+            "lineasImpresas": [
+              "Alquiler máquina de café Futurmat F3 (enero) | 1 | 90,00 | 21 % | 90,00 | 18,90 | ",
+              "Café en grano natural 1kg | 2 | 11,95 | 10 % | 23,90 | 2,39 | ",
+              "Azúcar blanquilla 10kg | 1 | 9,80 | 10 % | 9,80 | 0,98 | ",
+              "Vaso caña 20cl (caja 72) | 0.44 | 21,60 | 21 % | 9,50 | 2,00 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "02/03/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              1
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              1,
+              "2026-01-31",
+              "2026-03-02",
+              133.2,
+              24.27,
+              0,
+              157.47,
+              "emitida",
+              "Remesa enero"
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Alquiler máquina de café Futurmat F3 (enero)",
+              1,
+              90,
+              21,
+              90,
+              18.9,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Café en grano natural 1kg",
+              2,
+              11.95,
+              10,
+              23.9,
+              2.39,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Azúcar blanquilla 10kg",
+              1,
+              9.8,
+              10,
+              9.8,
+              0.98,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Vaso caña 20cl (caja 72)",
+              0.44,
+              21.6,
+              21,
+              9.5,
+              2,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Líneas de FA-2026-000101 (semilla) para un cliente sin recargo"
+    },
+    "GM-02": {
+      "ejercita": [
+        "RN-07",
+        "RN-08",
+        "RN-09",
+        "RN-19",
+        "RN-21"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "4",
+            "1,5",
+            "1"
+          ],
+          "cliente_id": "2",
+          "desc": [
+            "Desengrasante cocinas 10L",
+            "Portes y manipulación",
+            "Regularización ejercicio antiguo"
+          ],
+          "fecha": "2026-11-16",
+          "iva": [
+            "21",
+            "21",
+            "18"
+          ],
+          "precio": [
+            "18,50",
+            "2.5",
+            "100"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a eltornillo4@hotmail.com"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 177.75,
+            "cliente_id": 2,
+            "estado": "emitida",
+            "fecha": "2026-11-16",
+            "id": 10,
+            "iva": 34.33,
+            "numero": "FA-2026-000109",
+            "observaciones": "",
+            "recargo": 8.05,
+            "serie": "FA",
+            "total": 220.13,
+            "vencimiento": "2026-12-16"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 74,
+            "cantidad": 4,
+            "cuota_iva": 15.54,
+            "cuota_recargo": 3.85,
+            "descripcion": "Desengrasante cocinas 10L",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 18.5,
+            "tipo_iva": 21
+          },
+          {
+            "base": 3.75,
+            "cantidad": 1.5,
+            "cuota_iva": 0.79,
+            "cuota_recargo": 0.2,
+            "descripcion": "Portes y manipulación",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 2.5,
+            "tipo_iva": 21
+          },
+          {
+            "base": 100,
+            "cantidad": 1,
+            "cuota_iva": 18,
+            "cuota_recargo": 4,
+            "descripcion": "Regularización ejercicio antiguo",
+            "factura_id": 10,
+            "id": 31,
+            "precio": 100,
+            "tipo_iva": 18
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "16/11/2026",
+            "lineaCSV": "FA-2026-000109;16/11/2026;Ferretería El Tornillo;03488812K;177,75;34,33;8,05;220,13;emitida",
+            "lineasImpresas": [
+              "Desengrasante cocinas 10L | 4 | 18,50 | 21 % | 74,00 | 15,54 | 3,85",
+              "Portes y manipulación | 1.5 | 2,50 | 21 % | 3,75 | 0,79 | 0,20",
+              "Regularización ejercicio antiguo | 1 | 100,00 | 18 % | 100,00 | 18,00 | 4,00"
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "16/12/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              2
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              2,
+              "2026-11-16",
+              "2026-12-16",
+              177.75,
+              34.33,
+              8.05,
+              220.13,
+              "emitida",
+              ""
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Desengrasante cocinas 10L",
+              4,
+              18.5,
+              21,
+              74,
+              15.54,
+              3.85
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Portes y manipulación",
+              1.5,
+              2.5,
+              21,
+              3.75,
+              0.79,
+              0.2
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Regularización ejercicio antiguo",
+              1,
+              100,
+              18,
+              100,
+              18,
+              4
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Ferretería en recargo de equivalencia, coma decimal y tipo de IVA antiguo (18 %)"
+    },
+    "GM-03": {
+      "ejercita": [
+        "RN-11",
+        "RN-24",
+        "ANO-023"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "1"
+          ],
+          "cliente_id": "5",
+          "desc": [
+            "Plato llano hostelería 25cm (caja 12)"
+          ],
+          "fecha": "2026-12-31",
+          "iva": [
+            "21"
+          ],
+          "precio": [
+            "1000"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a compras@hotelvegabaja.com"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 1000,
+            "cliente_id": 5,
+            "estado": "emitida",
+            "fecha": "2026-12-31",
+            "id": 10,
+            "iva": 210,
+            "numero": "FA-2026-000109",
+            "observaciones": "",
+            "recargo": 0,
+            "serie": "FA",
+            "total": 1210,
+            "vencimiento": "2027-03-01"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 1000,
+            "cantidad": 1,
+            "cuota_iva": 210,
+            "cuota_recargo": 0,
+            "descripcion": "Plato llano hostelería 25cm (caja 12)",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 1000,
+            "tipo_iva": 21
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "31/12/2026",
+            "lineaCSV": "FA-2026-000109;31/12/2026;Hotel Vega Baja, S.A.;A45102939;1.000,00;210,00;0,00;1.210,00;emitida",
+            "lineasImpresas": [
+              "Plato llano hostelería 25cm (caja 12) | 1 | 1.000,00 | 21 % | 1.000,00 | 210,00 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "01/03/2027"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              5
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              5,
+              "2026-12-31",
+              "2027-03-01",
+              1000,
+              210,
+              0,
+              1210,
+              "emitida",
+              ""
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Plato llano hostelería 25cm (caja 12)",
+              1,
+              1000,
+              21,
+              1000,
+              210,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Base de 1.000,00 justos (sin descuento), cliente a 60 días, fecha de fin de año"
+    },
+    "GM-04": {
+      "ejercita": [
+        "RN-11",
+        "RN-13",
+        "RN-16",
+        "ANO-061",
+        "ANO-024"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "1"
+          ],
+          "cliente_id": "3",
+          "desc": [
+            "Pedido"
+          ],
+          "fecha": "2026-02-28",
+          "iva": [
+            "21"
+          ],
+          "obs": "Pedido temporada",
+          "precio": [
+            "1000,01"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a reservas@casaubaldo.es"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 980.01,
+            "cliente_id": 3,
+            "estado": "emitida",
+            "fecha": "2026-02-28",
+            "id": 10,
+            "iva": 205.8,
+            "numero": "FA-2026-000109",
+            "observaciones": "Pedido temporada Descuento volumen 2% aplicado",
+            "recargo": 0,
+            "serie": "FA",
+            "total": 1185.81,
+            "vencimiento": "2026-04-29"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 980.01,
+            "cantidad": 1,
+            "cuota_iva": 205.8,
+            "cuota_recargo": 0,
+            "descripcion": "Pedido",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 980.01,
+            "tipo_iva": 21
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "28/02/2026",
+            "lineaCSV": "FA-2026-000109;28/02/2026;Restaurante Casa Ubaldo, S.L.;B45610021;980,01;205,80;0,00;1.185,81;emitida",
+            "lineasImpresas": [
+              "Pedido | 1 | 980,01 | 21 % | 980,01 | 205,80 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "29/04/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              3
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              3,
+              "2026-02-28",
+              "2026-04-29",
+              980.01,
+              205.8,
+              0,
+              1185.81,
+              "emitida",
+              "Pedido temporada Descuento volumen 2% aplicado"
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Pedido",
+              1,
+              980.01,
+              21,
+              980.01,
+              205.8,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Base de 1.000,01 (salto del 2 %) con observaciones, a 60 días desde el 28 de febrero"
+    },
+    "GM-05": {
+      "ejercita": [
+        "RN-11",
+        "RN-14",
+        "RN-15",
+        "RN-08",
+        "ANO-062",
+        "ANO-066"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "100",
+            "80",
+            "10"
+          ],
+          "cliente_id": "4",
+          "desc": [
+            "Plato llano hostelería 25cm (caja 12)",
+            "Aceite de oliva virgen extra 5L",
+            "Café en grano natural 1kg"
+          ],
+          "fecha": "2028-02-28",
+          "iva": [
+            "21",
+            "4",
+            "10"
+          ],
+          "precio": [
+            "28,90",
+            "27,45",
+            "11,95"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a (sin email)"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 4945.9,
+            "cliente_id": 4,
+            "estado": "emitida",
+            "fecha": "2028-02-28",
+            "id": 10,
+            "iva": 671.47,
+            "numero": "FA-2026-000109",
+            "observaciones": " Descuento volumen 5% aplicado",
+            "recargo": 154.81,
+            "serie": "FA",
+            "total": 5772.18,
+            "vencimiento": "2028-03-29"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 2746,
+            "cantidad": 100,
+            "cuota_iva": 576.66,
+            "cuota_recargo": 142.79,
+            "descripcion": "Plato llano hostelería 25cm (caja 12)",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 27.46,
+            "tipo_iva": 21
+          },
+          {
+            "base": 2086.4,
+            "cantidad": 80,
+            "cuota_iva": 83.46,
+            "cuota_recargo": 10.43,
+            "descripcion": "Aceite de oliva virgen extra 5L",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 26.08,
+            "tipo_iva": 4
+          },
+          {
+            "base": 113.5,
+            "cantidad": 10,
+            "cuota_iva": 11.35,
+            "cuota_recargo": 1.59,
+            "descripcion": "Café en grano natural 1kg",
+            "factura_id": 10,
+            "id": 31,
+            "precio": 11.35,
+            "tipo_iva": 10
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "28/02/2028",
+            "lineaCSV": "FA-2026-000109;28/02/2028;Panadería Hnos. Cifuentes;E45332218;4.945,90;671,47;154,81;5.772,18;emitida",
+            "lineasImpresas": [
+              "Plato llano hostelería 25cm (caja 12) | 100 | 27,46 | 21 % | 2.746,00 | 576,66 | 142,79",
+              "Aceite de oliva virgen extra 5L | 80 | 26,08 | 4 % | 2.086,40 | 83,46 | 10,43",
+              "Café en grano natural 1kg | 10 | 11,35 | 10 % | 113,50 | 11,35 | 1,59"
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "29/03/2028"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              4
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              4,
+              "2028-02-28",
+              "2028-03-29",
+              4945.9,
+              671.47,
+              154.81,
+              5772.18,
+              "emitida",
+              " Descuento volumen 5% aplicado"
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Plato llano hostelería 25cm (caja 12)",
+              100,
+              27.46,
+              21,
+              2746,
+              576.66,
+              142.79
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Aceite de oliva virgen extra 5L",
+              80,
+              26.08,
+              4,
+              2086.4,
+              83.46,
+              10.43
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Café en grano natural 1kg",
+              10,
+              11.35,
+              10,
+              113.5,
+              11.35,
+              1.59
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Tramo del 5 % con tres tipos de IVA para una panadería en recargo, fecha en año bisiesto"
+    },
+    "GM-06": {
+      "ejercita": [
+        "RN-12",
+        "RN-14",
+        "ANO-013",
+        "ANO-062"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "20",
+            "15",
+            "5",
+            "0,92"
+          ],
+          "cliente_id": "5",
+          "desc": [
+            "Plato llano hostelería 25cm (caja 12)",
+            "Vaso caña 20cl (caja 72)",
+            "Desengrasante cocinas 10L",
+            "Portes y manipulación"
+          ],
+          "fecha": "2026-02-20",
+          "iva": [
+            "21",
+            "21",
+            "21",
+            "21"
+          ],
+          "obs": "Pedido apertura temporada",
+          "precio": [
+            "28,90",
+            "21,60",
+            "18,50",
+            "6,00"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a compras@hotelvegabaja.com"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 980.01,
+            "cliente_id": 5,
+            "estado": "emitida",
+            "fecha": "2026-02-20",
+            "id": 10,
+            "iva": 205.81,
+            "numero": "FA-2026-000109",
+            "observaciones": "Pedido apertura temporada Descuento volumen 2% aplicado",
+            "recargo": 0,
+            "serie": "FA",
+            "total": 1185.82,
+            "vencimiento": "2026-04-21"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 566.4,
+            "cantidad": 20,
+            "cuota_iva": 118.94,
+            "cuota_recargo": 0,
+            "descripcion": "Plato llano hostelería 25cm (caja 12)",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 28.32,
+            "tipo_iva": 21
+          },
+          {
+            "base": 317.55,
+            "cantidad": 15,
+            "cuota_iva": 66.69,
+            "cuota_recargo": 0,
+            "descripcion": "Vaso caña 20cl (caja 72)",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 21.17,
+            "tipo_iva": 21
+          },
+          {
+            "base": 90.65,
+            "cantidad": 5,
+            "cuota_iva": 19.04,
+            "cuota_recargo": 0,
+            "descripcion": "Desengrasante cocinas 10L",
+            "factura_id": 10,
+            "id": 31,
+            "precio": 18.13,
+            "tipo_iva": 21
+          },
+          {
+            "base": 5.41,
+            "cantidad": 0.92,
+            "cuota_iva": 1.14,
+            "cuota_recargo": 0,
+            "descripcion": "Portes y manipulación",
+            "factura_id": 10,
+            "id": 32,
+            "precio": 5.88,
+            "tipo_iva": 21
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "20/02/2026",
+            "lineaCSV": "FA-2026-000109;20/02/2026;Hotel Vega Baja, S.A.;A45102939;980,01;205,81;0,00;1.185,82;emitida",
+            "lineasImpresas": [
+              "Plato llano hostelería 25cm (caja 12) | 20 | 28,32 | 21 % | 566,40 | 118,94 | ",
+              "Vaso caña 20cl (caja 72) | 15 | 21,17 | 21 % | 317,55 | 66,69 | ",
+              "Desengrasante cocinas 10L | 5 | 18,13 | 21 % | 90,65 | 19,04 | ",
+              "Portes y manipulación | 0.92 | 5,88 | 21 % | 5,41 | 1,14 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "21/04/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              5
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              5,
+              "2026-02-20",
+              "2026-04-21",
+              980.01,
+              205.81,
+              0,
+              1185.82,
+              "emitida",
+              "Pedido apertura temporada Descuento volumen 2% aplicado"
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Plato llano hostelería 25cm (caja 12)",
+              20,
+              28.32,
+              21,
+              566.4,
+              118.94,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Vaso caña 20cl (caja 72)",
+              15,
+              21.17,
+              21,
+              317.55,
+              66.69,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Desengrasante cocinas 10L",
+              5,
+              18.13,
+              21,
+              90.65,
+              19.04,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Portes y manipulación",
+              0.92,
+              5.88,
+              21,
+              5.41,
+              1.14,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Líneas de FA-2026-000103: la base bruta pasa a 1.000,02 por el redondeo de una línea"
+    },
+    "GM-07": {
+      "ejercita": [
+        "RN-05",
+        "RN-20",
+        "ANO-059",
+        "ANO-071"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "-1",
+            "-1"
+          ],
+          "cliente_id": "1",
+          "desc": [
+            "Portes",
+            "Azúcar"
+          ],
+          "fecha": "2026-03-31",
+          "iva": [
+            "21",
+            "10"
+          ],
+          "obs": "Abono",
+          "precio": [
+            "2,50",
+            "1,25"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a laparada@gmail.com"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": -3.75,
+            "cliente_id": 1,
+            "estado": "emitida",
+            "fecha": "2026-03-31",
+            "id": 10,
+            "iva": -0.64,
+            "numero": "FA-2026-000109",
+            "observaciones": "Abono",
+            "recargo": 0,
+            "serie": "FA",
+            "total": -4.39,
+            "vencimiento": "2026-04-30"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": -2.5,
+            "cantidad": -1,
+            "cuota_iva": -0.52,
+            "cuota_recargo": 0,
+            "descripcion": "Portes",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 2.5,
+            "tipo_iva": 21
+          },
+          {
+            "base": -1.25,
+            "cantidad": -1,
+            "cuota_iva": -0.12,
+            "cuota_recargo": 0,
+            "descripcion": "Azúcar",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 1.25,
+            "tipo_iva": 10
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "31/03/2026",
+            "lineaCSV": "FA-2026-000109;31/03/2026;Cafetería La Parada, S.C.;J45771102;-3,75;-0,64;0,00;-4,39;emitida",
+            "lineasImpresas": [
+              "Portes | -1 | 2,50 | 21 % | -2,50 | -0,52 | ",
+              "Azúcar | -1 | 1,25 | 10 % | -1,25 | -0,12 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "30/04/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              1
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              1,
+              "2026-03-31",
+              "2026-04-30",
+              -3.75,
+              -0.64,
+              0,
+              -4.39,
+              "emitida",
+              "Abono"
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Portes",
+              -1,
+              2.5,
+              21,
+              -2.5,
+              -0.52,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Azúcar",
+              -1,
+              1.25,
+              10,
+              -1.25,
+              -0.12,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Abono metido como líneas negativas en una FA (mitades negativas hacia cero)"
+    },
+    "GM-08": {
+      "ejercita": [
+        "RN-17",
+        "RN-19",
+        "RN-10",
+        "ANO-032",
+        "ANO-064",
+        "ANO-040"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "1",
+            "1",
+            "2"
+          ],
+          "cliente_id": "2",
+          "desc": [
+            "Aceite de oliva virgen extra 5L",
+            "",
+            "Servicio especial"
+          ],
+          "fecha": "2026-11-16",
+          "iva": [
+            "4",
+            "21",
+            "5"
+          ],
+          "precio": [
+            "1.234,50",
+            "50",
+            "10"
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a eltornillo4@hotmail.com"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 21.23,
+            "cliente_id": 2,
+            "estado": "emitida",
+            "fecha": "2026-11-16",
+            "id": 10,
+            "iva": 1.05,
+            "numero": "FA-2026-000109",
+            "observaciones": "",
+            "recargo": 0.01,
+            "serie": "FA",
+            "total": 22.29,
+            "vencimiento": "2026-12-16"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 1.23,
+            "cantidad": 1,
+            "cuota_iva": 0.05,
+            "cuota_recargo": 0.01,
+            "descripcion": "Aceite de oliva virgen extra 5L",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 1.234,
+            "tipo_iva": 4
+          },
+          {
+            "base": 20,
+            "cantidad": 2,
+            "cuota_iva": 1,
+            "cuota_recargo": 0,
+            "descripcion": "Servicio especial",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 10,
+            "tipo_iva": 5
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "16/11/2026",
+            "lineaCSV": "FA-2026-000109;16/11/2026;Ferretería El Tornillo;03488812K;21,23;1,05;0,01;22,29;emitida",
+            "lineasImpresas": [
+              "Aceite de oliva virgen extra 5L | 1 | 1,23 | 4 % | 1,23 | 0,05 | 0,01",
+              "Servicio especial | 2 | 10,00 | 5 % | 20,00 | 1,00 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "16/12/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              2
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              2,
+              "2026-11-16",
+              "2026-12-16",
+              21.23,
+              1.05,
+              0.01,
+              22.29,
+              "emitida",
+              ""
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Aceite de oliva virgen extra 5L",
+              1,
+              1.234,
+              4,
+              1.23,
+              0.05,
+              0.01
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Servicio especial",
+              2,
+              10,
+              5,
+              20,
+              1,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Formulario con trampas: punto de miles, fila sin descripción con precio y tipo 5 % para cliente en recargo"
+    },
+    "GM-09": {
+      "ejercita": [
+        "RN-19",
+        "RN-22",
+        "RN-52",
+        "ANO-003"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "1"
+          ],
+          "cliente_id": "6",
+          "desc": [
+            "Café en grano natural 1kg"
+          ],
+          "fecha": "",
+          "iva": [
+            "10"
+          ],
+          "precio": [
+            ""
+          ]
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a (sin email)"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": {
+              "$numero": "NaN"
+            },
+            "cliente_id": 6,
+            "estado": "emitida",
+            "fecha": "2026-11-16",
+            "id": 10,
+            "iva": {
+              "$numero": "NaN"
+            },
+            "numero": "FA-2026-000109",
+            "observaciones": "",
+            "recargo": 0,
+            "serie": "FA",
+            "total": {
+              "$numero": "NaN"
+            },
+            "vencimiento": "2026-12-16"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": {
+              "$numero": "NaN"
+            },
+            "cantidad": 1,
+            "cuota_iva": {
+              "$numero": "NaN"
+            },
+            "cuota_recargo": 0,
+            "descripcion": "Café en grano natural 1kg",
+            "factura_id": 10,
+            "id": 29,
+            "precio": {
+              "$numero": "NaN"
+            },
+            "tipo_iva": 10
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "16/11/2026",
+            "lineaCSV": "FA-2026-000109;16/11/2026;Bar Nuevo Siglo;70355910k;0,00;0,00;0,00;0,00;emitida",
+            "lineasImpresas": [
+              "Café en grano natural 1kg | 1 | 0,00 | 10 % | 0,00 | 0,00 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "16/12/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              6
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              6,
+              "2026-11-16",
+              "2026-12-16",
+              {
+                "$numero": "NaN"
+              },
+              {
+                "$numero": "NaN"
+              },
+              0,
+              {
+                "$numero": "NaN"
+              },
+              "emitida",
+              ""
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Café en grano natural 1kg",
+              1,
+              {
+                "$numero": "NaN"
+              },
+              10,
+              {
+                "$numero": "NaN"
+              },
+              {
+                "$numero": "NaN"
+              },
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Precio y fecha vacíos (NaN en importes; fecha de hoy)"
+    },
+    "GM-10": {
+      "ejercita": [
+        "RN-07",
+        "RN-05",
+        "ANO-041",
+        "ANO-069",
+        "ANO-025"
+      ],
+      "entrada": {
+        "accion": "alta",
+        "body": {
+          "cant": [
+            "3",
+            "1"
+          ],
+          "cliente_id": "1",
+          "desc": [
+            "Tornillería",
+            "Bolsas"
+          ],
+          "fecha": "2026-11-16",
+          "iva": [
+            "21",
+            "10"
+          ],
+          "precio": [
+            "1,005",
+            "1,115"
+          ]
+        },
+        "cambiosClientes": {
+          "1": {
+            "dias_pago": 0,
+            "recargo_equivalencia": 2
+          }
+        }
+      },
+      "salida": {
+        "cambiosDeEstado": [],
+        "consola": [
+          "[email] AVISO: envio desactivado. Factura FA-2026-000109 pendiente de enviar a mano a laparada@gmail.com"
+        ],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 109
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 1
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": 4.13,
+            "cliente_id": 1,
+            "estado": "emitida",
+            "fecha": "2026-11-16",
+            "id": 10,
+            "iva": 0.74,
+            "numero": "FA-2026-000109",
+            "observaciones": "",
+            "recargo": 0,
+            "serie": "FA",
+            "total": 4.87,
+            "vencimiento": "2026-12-16"
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": 3.01,
+            "cantidad": 3,
+            "cuota_iva": 0.63,
+            "cuota_recargo": 0,
+            "descripcion": "Tornillería",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 1.005,
+            "tipo_iva": 21
+          },
+          {
+            "base": 1.12,
+            "cantidad": 1,
+            "cuota_iva": 0.11,
+            "cuota_recargo": 0,
+            "descripcion": "Bolsas",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 1.115,
+            "tipo_iva": 10
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "16/11/2026",
+            "lineaCSV": "FA-2026-000109;16/11/2026;Cafetería La Parada, S.C.;J45771102;4,13;0,74;0,00;4,87;emitida",
+            "lineasImpresas": [
+              "Tornillería | 3 | 1,00 | 21 % | 3,01 | 0,63 | ",
+              "Bolsas | 1 | 1,11 | 10 % | 1,12 | 0,11 | "
+            ],
+            "numero": "FA-2026-000109",
+            "vencimientoImpreso": "16/12/2026"
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              1
+            ],
+            "sql": "SELECT * FROM clientes WHERE id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "FA",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              109,
+              "FA",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "FA-2026-000109",
+              "FA",
+              1,
+              "2026-11-16",
+              "2026-12-16",
+              4.13,
+              0.74,
+              0,
+              4.87,
+              "emitida",
+              ""
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Tornillería",
+              3,
+              1.005,
+              21,
+              3.01,
+              0.63,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Bolsas",
+              1,
+              1.115,
+              10,
+              1.12,
+              0.11,
+              0
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          }
+        ]
+      },
+      "titulo": "Cliente al contado (dias_pago 0) con marca de recargo 2 y precios con coma flotante"
+    },
+    "GM-11": {
+      "ejercita": [
+        "RN-33",
+        "RN-34",
+        "RN-35",
+        "ANO-013",
+        "ANO-075"
+      ],
+      "entrada": {
+        "accion": "rectificar",
+        "body": {
+          "motivo": "Error en precios"
+        },
+        "id_factura": "5"
+      },
+      "salida": {
+        "cambiosDeEstado": [
+          {
+            "estadoAntes": "emitida",
+            "estadoDespues": "rectificada",
+            "numero": "FA-2026-000105"
+          }
+        ],
+        "consola": [],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 108
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 2
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": -2287.75,
+            "cliente_id": 3,
+            "estado": "emitida",
+            "fecha": "2026-11-16",
+            "id": 10,
+            "iva": -468.63,
+            "numero": "RE-2026-000002",
+            "observaciones": "Rectifica FA-2026-000105. Error en precios",
+            "recargo": {
+              "$numero": "-0"
+            },
+            "rectifica_a": "FA-2026-000105",
+            "serie": "RE",
+            "total": -2756.38,
+            "vencimiento": null
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": -145,
+            "cantidad": -1,
+            "cuota_iva": -30.45,
+            "cuota_recargo": {
+              "$numero": "-0"
+            },
+            "descripcion": "Rectificación: Mantenimiento cámaras frigoríficas (marzo)",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 145,
+            "tipo_iva": 21
+          },
+          {
+            "base": -658.8,
+            "cantidad": -24,
+            "cuota_iva": -26.35,
+            "cuota_recargo": {
+              "$numero": "-0"
+            },
+            "descripcion": "Rectificación: Aceite de oliva virgen extra 5L",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 27.45,
+            "tipo_iva": 4
+          },
+          {
+            "base": -358.5,
+            "cantidad": -30,
+            "cuota_iva": -35.85,
+            "cuota_recargo": {
+              "$numero": "-0"
+            },
+            "descripcion": "Rectificación: Café en grano natural 1kg",
+            "factura_id": 10,
+            "id": 31,
+            "precio": 11.95,
+            "tipo_iva": 10
+          },
+          {
+            "base": -1156,
+            "cantidad": -40,
+            "cuota_iva": -242.76,
+            "cuota_recargo": {
+              "$numero": "-0"
+            },
+            "descripcion": "Rectificación: Plato llano hostelería 25cm (caja 12)",
+            "factura_id": 10,
+            "id": 32,
+            "precio": 28.9,
+            "tipo_iva": 21
+          },
+          {
+            "base": -17.2,
+            "cantidad": -2.87,
+            "cuota_iva": -3.61,
+            "cuota_recargo": {
+              "$numero": "-0"
+            },
+            "descripcion": "Rectificación: Portes y manipulación",
+            "factura_id": 10,
+            "id": 33,
+            "precio": 6,
+            "tipo_iva": 21
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "16/11/2026",
+            "lineaCSV": "RE-2026-000002;16/11/2026;Restaurante Casa Ubaldo, S.L.;B45610021;-2.287,75;-468,63;0,00;-2.756,38;emitida",
+            "lineasImpresas": [
+              "Rectificación: Mantenimiento cámaras frigoríficas (marzo) | -1 | 145,00 | 21 % | -145,00 | -30,45 | ",
+              "Rectificación: Aceite de oliva virgen extra 5L | -24 | 27,45 | 4 % | -658,80 | -26,35 | ",
+              "Rectificación: Café en grano natural 1kg | -30 | 11,95 | 10 % | -358,50 | -35,85 | ",
+              "Rectificación: Plato llano hostelería 25cm (caja 12) | -40 | 28,90 | 21 % | -1.156,00 | -242,76 | ",
+              "Rectificación: Portes y manipulación | -2.87 | 6,00 | 21 % | -17,20 | -3,61 | "
+            ],
+            "numero": "RE-2026-000002",
+            "vencimientoImpreso": ""
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              "5"
+            ],
+            "sql": "SELECT f.*, c.nombre AS cliente FROM facturas f JOIN clientes c ON c.id = f.cliente_id WHERE f.id = ?"
+          },
+          {
+            "metodo": "all",
+            "params": [
+              "5"
+            ],
+            "sql": "SELECT * FROM lineas WHERE factura_id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "RE",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              2,
+              "RE",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "RE-2026-000002",
+              "RE",
+              3,
+              "2026-11-16",
+              null,
+              -2287.75,
+              -468.63,
+              {
+                "$numero": "-0"
+              },
+              -2756.38,
+              "emitida",
+              "FA-2026-000105",
+              "Rectifica FA-2026-000105. Error en precios"
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,rectifica_a,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Mantenimiento cámaras frigoríficas (marzo)",
+              -1,
+              145,
+              21,
+              -145,
+              -30.45,
+              {
+                "$numero": "-0"
+              }
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Aceite de oliva virgen extra 5L",
+              -24,
+              27.45,
+              4,
+              -658.8,
+              -26.35,
+              {
+                "$numero": "-0"
+              }
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Café en grano natural 1kg",
+              -30,
+              11.95,
+              10,
+              -358.5,
+              -35.85,
+              {
+                "$numero": "-0"
+              }
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Plato llano hostelería 25cm (caja 12)",
+              -40,
+              28.9,
+              21,
+              -1156,
+              -242.76,
+              {
+                "$numero": "-0"
+              }
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Portes y manipulación",
+              -2.87,
+              6,
+              21,
+              -17.2,
+              -3.61,
+              {
+                "$numero": "-0"
+              }
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              5
+            ],
+            "sql": "UPDATE facturas SET estado = 'rectificada' WHERE id = ?"
+          }
+        ]
+      },
+      "titulo": "Rectificación de FA-2026-000105 (cabecera que no cuadra con sus líneas), con motivo"
+    },
+    "GM-12": {
+      "ejercita": [
+        "RN-31",
+        "RN-34",
+        "RN-35",
+        "ANO-006",
+        "ANO-034",
+        "ANO-038"
+      ],
+      "entrada": {
+        "accion": "rectificar",
+        "body": {},
+        "id_factura": "2"
+      },
+      "salida": {
+        "cambiosDeEstado": [
+          {
+            "estadoAntes": "cobrada",
+            "estadoDespues": "rectificada",
+            "numero": "FA-2026-000102"
+          }
+        ],
+        "consola": [],
+        "contadoresFinales": [
+          {
+            "anyo": 2026,
+            "serie": "FA",
+            "ultimo": 108
+          },
+          {
+            "anyo": 2026,
+            "serie": "RE",
+            "ultimo": 2
+          }
+        ],
+        "facturasNuevas": [
+          {
+            "base": -115.6,
+            "cliente_id": 2,
+            "estado": "emitida",
+            "fecha": "2026-11-16",
+            "id": 10,
+            "iva": -24.28,
+            "numero": "RE-2026-000002",
+            "observaciones": "Rectifica FA-2026-000102. ",
+            "recargo": -6.01,
+            "rectifica_a": "FA-2026-000102",
+            "serie": "RE",
+            "total": -145.89,
+            "vencimiento": null
+          }
+        ],
+        "lineasNuevas": [
+          {
+            "base": -74,
+            "cantidad": -4,
+            "cuota_iva": -15.54,
+            "cuota_recargo": -3.85,
+            "descripcion": "Rectificación: Desengrasante cocinas 10L",
+            "factura_id": 10,
+            "id": 29,
+            "precio": 18.5,
+            "tipo_iva": 21
+          },
+          {
+            "base": -28.9,
+            "cantidad": -1,
+            "cuota_iva": -6.07,
+            "cuota_recargo": -1.5,
+            "descripcion": "Rectificación: Plato llano hostelería 25cm (caja 12)",
+            "factura_id": 10,
+            "id": 30,
+            "precio": 28.9,
+            "tipo_iva": 21
+          },
+          {
+            "base": -10.8,
+            "cantidad": -0.5,
+            "cuota_iva": -2.27,
+            "cuota_recargo": -0.56,
+            "descripcion": "Rectificación: Vaso caña 20cl (caja 72)",
+            "factura_id": 10,
+            "id": 31,
+            "precio": 21.6,
+            "tipo_iva": 21
+          },
+          {
+            "base": -1.9,
+            "cantidad": -0.32,
+            "cuota_iva": -0.4,
+            "cuota_recargo": -0.1,
+            "descripcion": "Rectificación: Portes y manipulación",
+            "factura_id": 10,
+            "id": 32,
+            "precio": 6,
+            "tipo_iva": 21
+          }
+        ],
+        "presentacion": [
+          {
+            "fechaImpresa": "16/11/2026",
+            "lineaCSV": "RE-2026-000002;16/11/2026;Ferretería El Tornillo;03488812K;-115,60;-24,28;-6,01;-145,89;emitida",
+            "lineasImpresas": [
+              "Rectificación: Desengrasante cocinas 10L | -4 | 18,50 | 21 % | -74,00 | -15,54 | -3,85",
+              "Rectificación: Plato llano hostelería 25cm (caja 12) | -1 | 28,90 | 21 % | -28,90 | -6,07 | -1,50",
+              "Rectificación: Vaso caña 20cl (caja 72) | -0.5 | 21,60 | 21 % | -10,80 | -2,27 | -0,56",
+              "Rectificación: Portes y manipulación | -0.32 | 6,00 | 21 % | -1,90 | -0,40 | -0,10"
+            ],
+            "numero": "RE-2026-000002",
+            "vencimientoImpreso": ""
+          }
+        ],
+        "respuesta": {
+          "estado": 302,
+          "tipo": "redirect",
+          "url": "/facturas/10"
+        },
+        "sentencias": [
+          {
+            "metodo": "get",
+            "params": [
+              "2"
+            ],
+            "sql": "SELECT f.*, c.nombre AS cliente FROM facturas f JOIN clientes c ON c.id = f.cliente_id WHERE f.id = ?"
+          },
+          {
+            "metodo": "all",
+            "params": [
+              "2"
+            ],
+            "sql": "SELECT * FROM lineas WHERE factura_id = ?"
+          },
+          {
+            "metodo": "get",
+            "params": [
+              "RE",
+              2026
+            ],
+            "sql": "SELECT ultimo FROM contadores WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              2,
+              "RE",
+              2026
+            ],
+            "sql": "UPDATE contadores SET ultimo = ? WHERE serie = ? AND anyo = ?"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              "RE-2026-000002",
+              "RE",
+              2,
+              "2026-11-16",
+              null,
+              -115.6,
+              -24.28,
+              -6.01,
+              -145.89,
+              "emitida",
+              "FA-2026-000102",
+              "Rectifica FA-2026-000102. "
+            ],
+            "sql": "INSERT INTO facturas (numero,serie,cliente_id,fecha,vencimiento,base,iva,recargo,total,estado,rectifica_a,observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Desengrasante cocinas 10L",
+              -4,
+              18.5,
+              21,
+              -74,
+              -15.54,
+              -3.85
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Plato llano hostelería 25cm (caja 12)",
+              -1,
+              28.9,
+              21,
+              -28.9,
+              -6.07,
+              -1.5
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Vaso caña 20cl (caja 72)",
+              -0.5,
+              21.6,
+              21,
+              -10.8,
+              -2.27,
+              -0.56
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              10,
+              "Rectificación: Portes y manipulación",
+              -0.32,
+              6,
+              21,
+              -1.9,
+              -0.4,
+              -0.1
+            ],
+            "sql": "INSERT INTO lineas (factura_id,descripcion,cantidad,precio,tipo_iva,base,cuota_iva,cuota_recargo) VALUES (?,?,?,?,?,?,?,?)"
+          },
+          {
+            "metodo": "run",
+            "params": [
+              2
+            ],
+            "sql": "UPDATE facturas SET estado = 'rectificada' WHERE id = ?"
+          }
+        ]
+      },
+      "titulo": "Rectificación de FA-2026-000102 (cobrada, con recargo), sin motivo"
+    }
+  },
+  "condiciones": {
+    "datosIniciales": "semilla de db.js:93-180 (pruebas/ayudas/semilla.js)",
+    "reloj": "2026-11-16T10:00:00",
+    "zonaHoraria": "Europe/Madrid"
+  },
+  "formato": "golden-master-ciclo-factura/1"
+}

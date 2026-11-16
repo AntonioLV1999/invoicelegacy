@@ -4,7 +4,7 @@
 |---|---|
 | Fecha de elaboración | 16/11/2026 |
 | Versión del código analizada | commit `5f2e06e` (rama `master`). El código fuente no ha cambiado desde `1f35d01` |
-| Fuentes consolidadas | [Mapa del sistema](mapa-sistema.md) (ANO-001 a 031, P-01 a 12), [ciclo de vida de una factura](flujo-factura.md) (ANO-032 a 042, P-13 a 16), [registro de riesgos](registro-riesgos.md) (R1 a R33, ANO-043 a 056, P-17 a 20), [memoria histórica](memoria-historica.md) (H-01 a H-27, ANO-057 y 058, P-21 a 41), [reglas de negocio](reglas-de-negocio.md) (RN-01 a RN-55, ANO-059 a 066, P-42 a 47) y las 14 contradicciones (`contradiccion-01` a `contradiccion-14`; ANO-067 a 071, P-48 a 58) |
+| Fuentes consolidadas | [Mapa del sistema](mapa-sistema.md) (ANO-001 a 031, P-01 a 12), [ciclo de vida de una factura](flujo-factura.md) (ANO-032 a 042, P-13 a 16), [registro de riesgos](registro-riesgos.md) (R1 a R33, ANO-043 a 056, P-17 a 20), [memoria histórica](memoria-historica.md) (H-01 a H-27, ANO-057 y 058, P-21 a 41), [reglas de negocio](reglas-de-negocio.md) (RN-01 a RN-55, ANO-059 a 066, P-42 a 47) y las 14 contradicciones (`contradiccion-01` a `contradiccion-14`; ANO-067 a 071, P-48 a 58). Después, los tests de caracterización de [pruebas/](../../pruebas/LEEME.md) (ANO-072 a 078, P-75 a 77, D-32 a 35; 16/11/2026) |
 | Fuentes pedidas que **no existen** | `entrevista-negocio.md` y cualquier resultado de arqueología de datos. Búsqueda de ficheros con «entrevista», «arqueolog» o «anomal» en todo el repositorio, sin resultados (16/11/2026). `datos/` solo contiene `migracion_mysql_2018.sql` |
 | Datos reales consultados | **Ninguno.** No hay copia de `datos/gesfact.db` de producción |
 | Testimonios del negocio recogidos | **Ninguno.** El [acta simulada del 16/11/2026](entrevista-negocio-simulada.md) se propagó el 16/11/2026, pero no aporta testimonio: ninguna persona de la empresa participó (acta §0). Ver apartado 5 |
@@ -25,6 +25,11 @@ arqueología de datos.
 Sus respuestas son suposiciones del consultor o testimonio simulado, así que no cuentan como testigo NEGOCIO.
 **No se cierra ninguna entrada: siguen 62 PENDIENTES.** Cada entrada afectada lleva ahora en su evidencia la
 respuesta prevista, marcada como SUPOSICIÓN. El apartado 5 registra la revisión entrada por entrada.
+
+**Actualización del 16/11/2026 (tests de caracterización).** Al ejecutar el código para escribir la red de tests
+([pruebas/LEEME.md](../../pruebas/LEEME.md)) aparecieron comportamientos no documentados. Se registran como
+**A-63 a A-67** (ANO-072 a ANO-078), al final del apartado 1. **Quedan 67 PENDIENTES.** El apartado 5.2 detalla
+la revisión.
 
 ### 0.2 Los tres testigos
 
@@ -1397,6 +1402,127 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
 - **Decisión pendiente**: si alguna de estas líneas sigue viva. Responsable: el responsable del proyecto.
 - **Impacto**: nivel D.
 
+### Hallazgos de la caracterización (16/11/2026)
+
+Comportamientos que no figuraban en ningún documento del reconocimiento y que aparecieron al ejecutar el código
+real para escribir los tests de caracterización ([pruebas/LEEME.md](../../pruebas/LEEME.md)). Cada entrada
+indica su nivel, porque no siguen el orden por impacto de los apartados anteriores. Todos están congelados por un
+test «CONGELA comportamiento actual: ANO-NNN» de
+[pruebas/caracterizacion/09-anomalias.test.js](../../pruebas/caracterizacion/09-anomalias.test.js). Método de
+ejecución: Node 26.13.0, TZ `Europe/Madrid`, reloj fijado y BD sustituida por un doble en memoria
+(`pruebas/ayudas/doble-bd.js`), sin abrir ninguna base de datos.
+
+#### A-63 · Las fechas imposibles se aceptan y se desplazan al mes siguiente
+
+- **Descripción**: `sumarDias` interpreta una fecha inexistente con día 29 a 31 desbordándola al mes siguiente, sin
+  aviso: «2026-02-30» es el 2 de marzo y «2026-04-31» el 1 de mayo. Una factura manual con fecha «2026-02-30» se
+  graba con esa fecha y vence el 01/04/2026 (el 02/03 + 30). Con un día 32 o un mes imposible la fecha no se
+  interpreta y el vencimiento sale «NaN-NaN-NaN»: es lo que pasa en la remesa de un mes «2026-13» o «2026-00», cuya
+  línea, además, dice «(undefined 2026)». Amplía A-31 y A-32, que solo describían la fecha y las observaciones.
+- **Origen**: **ANO-072** (RAREZA, BAJA): desbordamiento en `sumarDias`. **ANO-077** (RAREZA, BAJA): vencimiento y
+  descripción de línea de la remesa con mes imposible. Relacionadas: ANO-048, ANO-049; RN-24, RN-43.
+- **Evidencia**:
+  - CÓDIGO: `lib/util.js:20-26` (`new Date(fecha)` sin validar); `routes/facturas.js:44,68-69`;
+    `scripts/remesa_mensual.js:21,53,59-60,80-84`. Ejecutado el 16/11/2026: `sumarDias('2026-02-30', 0)` =
+    «2026-03-02»; `('2026-02-30', 30)` = «2026-04-01»; `('2026-04-31', 0)` = «2026-05-01»; `('2026-02-32', 0)` =
+    «NaN-NaN-NaN». Remesa `2026-13` sobre el contrato 1 de la semilla: fecha «2026-13-31», vencimiento
+    «NaN-NaN-NaN», línea «Alquiler máquina de café Futurmat F3 (undefined 2026)».
+  - DATOS: sin veredicto. Lo daría **D-22** (ya busca fechas mal formadas), ampliada con **D-32**.
+  - NEGOCIO: sin testimonio.
+- **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS (validación ausente).
+  - Desbloquea: **P-75** (Marga) y **D-32**.
+- **Dependientes**: nadie identificado.
+- **Tratamiento propuesto**: corregir en modernización junto con A-31 (validar la fecha sin cambiar el formato
+  guardado). No retroactivo.
+- **Decisión pendiente**: ninguna más allá de la clasificación.
+- **Impacto**: nivel D. Un vencimiento desplazado o ilegible; exige un error al teclear.
+
+#### A-64 · Los formatos no controlan valores fuera de rango
+
+- **Descripción**: `formatearImporte` no contempla números no finitos ni de 21 cifras o más: `Infinity` se
+  muestra «Infinity,undefined» y `1e21`, «1e+21,undefined». Se puede llegar a ello tecleando «1e400» como precio:
+  `parseFloat` lo lee como `Infinity` y la factura se graba con base y total infinitos (y con el aviso de
+  descuento del 5 %). Por su parte, `numeracion.formatear` no valida el número: con 0 da «FA-2026-000000» y con −5
+  «FA-2026-0000-5», que es lo que se emitiría si el contador tuviera un valor negativo.
+- **Origen**: **ANO-073** (RAREZA, BAJA): `formatearImporte` y entrada «1e400». **ANO-074** (RAREZA, BAJA):
+  `formatear` con números ≤ 0. Relacionadas: ANO-032, ANO-003; RN-19, RN-26, RN-50.
+- **Evidencia**:
+  - CÓDIGO: `lib/util.js:51-58` (`toFixed(2)` devuelve notación exponencial o «Infinity», sin parte decimal);
+    `routes/facturas.js:59-60`; `lib/numeracion.js:30-42`. Ejecutado el 16/11/2026 (valores en el test).
+  - DATOS: sin veredicto. Lo daría **D-33**.
+  - NEGOCIO: sin testimonio.
+- **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS, latente.
+  - Desbloquea: **D-33** (no hace falta pregunta: solo los datos dirán si ha ocurrido).
+- **Dependientes**: nadie identificado.
+- **Tratamiento propuesto**: corregir en modernización junto con A-28 (validación de importes). No retroactivo.
+- **Decisión pendiente**: ninguna.
+- **Impacto**: nivel D. Muy improbable, pero una factura con importe infinito consume número legal.
+
+#### A-65 · La rectificativa graba ceros negativos
+
+- **Descripción**: la rectificativa cambia el signo de los importes con el operador `-`. Cuando un importe de la
+  original es 0 (el recargo de casi todas las facturas), envía a la BD un **cero negativo** (`-0`), tanto en la
+  cabecera como en cada línea. En pantalla y en el CSV no se nota: `formatearImporte(-0)` da «0,00» y la vista no
+  pinta el recargo de las líneas porque `-0` es falso. Qué guarda SQLite con `-0` en una columna `REAL` y qué
+  devuelve después es **SUPOSICIÓN** sin verificar (no hay `sqlite3` instalado).
+- **Origen**: **ANO-075** (RAREZA, BAJA). Relacionadas: RN-34 (espejo exacto), A-10.
+- **Evidencia**:
+  - CÓDIGO: `routes/facturas.js:141-143` (`-f.recargo`) y `:149-150` (`-l.cuota_recargo`); `lib/util.js:51-58`.
+    Ejecutado el 16/11/2026: rectificar FA-2026-000108 (recargo 0) envía `recargo = -0` en el INSERT de la
+    cabecera y `cuota_recargo = -0` en sus tres líneas.
+  - DATOS: sin veredicto. Lo daría **D-34**.
+  - NEGOCIO: sin testimonio.
+- **Clasificación final**: **PENDIENTE**. Hipótesis: ACCIDENTAL.
+  - Desbloquea: **D-34** y la verificación técnica con `sqlite3` real (pruebas/LEEME.md, cobertura pendiente).
+- **Dependientes**: quien compare importes de la BD por igualdad exacta (por ejemplo, Contaplus si importa el
+  valor binario). **SUPOSICIÓN**.
+- **Tratamiento propuesto**: especificar tal cual mientras no se verifique el efecto en SQLite.
+- **Decisión pendiente**: ninguna.
+- **Impacto**: nivel D.
+
+#### A-66 · Los parámetros de los informes no se validan
+
+- **Descripción**: el año de los informes solo pasa por `parseInt`. «26» se toma como el año 26: el resumen de IVA
+  consulta del «26-04-01» al «26-06-31» y el CSV busca «26-%», y los dos salen vacíos sin aviso; «2026abc» se lee
+  como 2026; «abc» se cambia por el año en curso. Un trimestre negativo da la misma excepción que el 5 (RN-46 solo
+  documentaba «de 5 en adelante»). Amplía A-53.
+- **Origen**: **ANO-076** (RAREZA, BAJA). Relacionadas: ANO-026, ANO-063; RN-46, RN-48.
+- **Evidencia**:
+  - CÓDIGO: `routes/informes.js:15-19,35-38`. Ejecutado el 16/11/2026 con el doble de BD: parámetros enviados
+    `['26-04-01', '26-06-31']`, `['26-%']`, `['2026-04-01', '2026-06-31']` (dos veces); con `trimestre=-1`, `TypeError:
+    Cannot read properties of undefined (reading '0')`.
+  - DATOS: no aplica (no deja rastro en la BD).
+  - NEGOCIO: sin testimonio.
+- **Clasificación final**: **PENDIENTE**. Hipótesis: ACCIDENTAL. Por la excepción del apartado 0.3, basta con
+  CÓDIGO y NEGOCIO.
+  - Desbloquea: **P-76** (Puri).
+- **Dependientes**: la gestoría, si alguna vez escribe la dirección a mano (A-53).
+- **Tratamiento propuesto**: corregir en modernización junto con A-53.
+- **Decisión pendiente**: ninguna.
+- **Impacto**: nivel D. Un informe vacío que puede confundirse con «sin facturas».
+
+#### A-67 · Las columnas del formulario se emparejan por posición
+
+- **Descripción**: el alta manual recorre las descripciones y toma la cantidad, el precio y el tipo de IVA del
+  **mismo índice** de sus listas. Si una lista llega con menos elementos que las descripciones, las líneas
+  sobrantes van con cantidad o tipo `NaN` (y la factura entera con base y total `NaN`). Si falta un elemento en
+  medio, los valores siguientes **se desplazan una línea**: con tipos «21, 4» para tres líneas, la tercera queda
+  con tipo `NaN`. Confirma desde el servidor la SUPOSICIÓN de la [contradicción 06](contradiccion-06-tipos-de-iva.md)
+  §2; que un navegador real llegue a enviar listas desiguales sigue siendo SUPOSICIÓN.
+- **Origen**: **ANO-078** (RIESGO, ALTA: afecta a importes). Relacionadas: ANO-003, ANO-040; RN-19; A-28.
+- **Evidencia**:
+  - CÓDIGO: `routes/facturas.js:50-63`. Ejecutado el 16/11/2026: con `desc = [a, b]`, `cant = [1]`,
+    `precio = [10, 20]`, `iva = [21]`, la línea «b» se graba con cantidad `NaN`, tipo `NaN` y base `NaN`, y la
+    cabecera con base y total `NaN`.
+  - DATOS: sin veredicto. Lo daría **D-18** (ya busca líneas con importes no numéricos), con **D-35**.
+  - NEGOCIO: sin testimonio.
+- **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS, latente.
+  - Desbloquea: **P-77** (Marga) y **D-35**, más la verificación con navegador de la contradicción 06.
+- **Dependientes**: nadie identificado.
+- **Tratamiento propuesto**: corregir en modernización junto con A-28. No retroactivo.
+- **Decisión pendiente**: ninguna.
+- **Impacto**: nivel B. Una factura con tipos de IVA cambiados de línea tiene el IVA mal calculado.
+
 ---
 
 ## 2. Tabla resumen
@@ -1465,10 +1591,18 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
 | A-60 | Documentación obsoleta | D | PENDIENTE | Sin indicio | Documentar sin especificar | Contacto de soporte (responsable) |
 | A-61 | Sin tests, lógica duplicada | D | PENDIENTE | Sin indicio | Documentar sin especificar | Condición de entrada (responsable) |
 | A-62 | Partes abandonadas | D | PENDIENTE | Sin indicio | Documentar sin especificar | Si siguen vivas (responsable) |
+| A-63 | Fechas imposibles desbordadas | D | PENDIENTE | Bug a secas | Corregir con A-31, no retroactivo | — |
+| A-64 | Formatos sin control de rango | D | PENDIENTE | Bug a secas (latente) | Corregir con A-28 | — |
+| A-65 | Ceros negativos en la RE | D | PENDIENTE | Accidental | Especificar tal cual | — |
+| A-66 | Parámetros de informes sin validar | D | PENDIENTE | Accidental | Corregir con A-53 | — |
+| A-67 | Columnas emparejadas por posición | B | PENDIENTE | Bug a secas (latente) | Corregir con A-28, no retroactivo | — |
 
 **Recuento**: 62 entradas (15 de nivel A, 17 de B, 10 de C y 20 de D). **PENDIENTES: 62.** INTENCIONAL: 0.
 ACCIDENTAL: 0. BUG HISTÓRICO CON DEPENDIENTES: 0. BUG A SECAS: 0. Sin cambios tras la propagación del acta
 simulada del 16/11/2026 (apartado 5).
+
+**Recuento tras la caracterización del 16/11/2026** (apartado 5.2): **67 entradas** (15 de nivel A, 18 de B, 10
+de C y 24 de D). **PENDIENTES: 67.** Ninguna otra clasificación.
 
 ---
 
@@ -1625,6 +1759,18 @@ la de la consulta (Principio II), y no se copian datos de clientes al repositori
 Las entradas que **no dependen de ninguna consulta** y se cierran solo con testimonio son A-11 (en parte),
 A-20, A-43 a A-46, A-50, A-51, A-53, A-56 y A-58 a A-62.
 
+### 3.3 Preguntas y consultas de los hallazgos de la caracterización (16/11/2026)
+
+| ID | Pregunta o consulta | Destinatario | Desbloquea |
+|---|---|---|---|
+| **P-75** | ¿Se ha tecleado alguna vez una fecha de factura que no existe (un 30 de febrero, un 31 de abril)? ¿Se revisa el vencimiento impreso? | Marga | A-63 |
+| **P-76** | ¿Escribe alguna vez a mano la dirección del informe de IVA o del CSV (por ejemplo, con el año en dos cifras)? ¿Ha recibido alguna vez un informe o un CSV vacío? | Puri (gestoría) | A-66 |
+| **P-77** | En «Nueva factura», ¿se ha visto alguna vez una línea con el tipo de IVA de otra, o una factura con importes en blanco o «0,00» que no debería? | Marga | A-67 |
+| **D-32** | Fechas que SQLite no reconoce como día real: `SELECT numero, fecha, vencimiento FROM facturas WHERE date(fecha) IS NULL OR date(fecha) <> fecha OR vencimiento = 'NaN-NaN-NaN';` | Equipo de documentación | A-63 |
+| **D-33** | Importes no finitos o enormes: `SELECT numero, base, total FROM facturas WHERE ABS(total) > 1e12 OR typeof(total) NOT IN ('real', 'integer');` y números con signo: `SELECT numero FROM facturas WHERE numero LIKE '%-%-%-%';` | Equipo de documentación | A-64 |
+| **D-34** | Ceros negativos en rectificativas: `SELECT numero, recargo, CAST(recargo AS TEXT) FROM facturas WHERE serie = 'RE' AND recargo = 0;` (ver si el texto es «-0.0») | Equipo de documentación | A-65 |
+| **D-35** | Líneas con tipo de IVA o cantidad no numéricos: `SELECT f.numero, l.* FROM lineas l JOIN facturas f ON f.id = l.factura_id WHERE typeof(l.tipo_iva) <> 'integer' OR typeof(l.cantidad) NOT IN ('real', 'integer');` | Equipo de documentación | A-67 |
+
 ---
 
 ## 4. Trazabilidad: ninguna fuente queda huérfana
@@ -1651,6 +1797,10 @@ A-20, A-43 a A-46, A-50, A-51, A-53, A-56 y A-58 a A-62.
 | 016 | A-43 | 034 | A-39 | 052 | A-44 | 070 | A-30 |
 | 017 | A-44 | 035 | A-24 | 053 | A-29 | 071 | A-23 |
 | 018 | A-49 | 036 | A-55 | 054 | A-46 | | |
+
+Añadidas por la caracterización del 16/11/2026: **072** → A-63, **073** → A-64, **074** → A-64, **075** → A-65,
+**076** → A-66, **077** → A-63, **078** → A-67. El test que congela cada `ANO` ejecutable se busca por su
+identificador en `pruebas/caracterizacion/` (nombre «CONGELA comportamiento actual: ANO-NNN»).
 
 ### 4.2 Reglas de negocio
 
@@ -1793,6 +1943,7 @@ en P-40, que figura en la agenda; el 5 (documentación) en A-60; el 6 (H-19) en 
 
 Las 58 preguntas anteriores (P-01 a P-58) figuran en la agenda del apartado 3.1. Este documento añade **P-59 a
 P-66**. El acta simulada del 16/11/2026 añade **P-67 a P-74** (acta §6.3), que también están en el apartado 3.1.
+La caracterización del 16/11/2026 añade **P-75 a P-77** y las consultas **D-32 a D-35** (apartado 3.3).
 
 ---
 
@@ -1883,3 +2034,14 @@ hace falta además la consulta D indicada.
 
 **Resultado**: 49 entradas tratadas por el acta, 13 no tratadas, **0 cierres**. Lista PENDIENTE: **62 entradas,
 de A-01 a A-62** (apartado 3).
+
+### 5.2 Revisión del 16/11/2026: red de tests de caracterización
+
+| Campo | Valor |
+|---|---|
+| Fuente | Ejecución del código real con `node --test` (Node 26.13.0, TZ `Europe/Madrid`, reloj fijado, BD sustituida por un doble en memoria). Tests en [pruebas/](../../pruebas/LEEME.md) |
+| Valor como testigo | CÓDIGO. No aporta NEGOCIO ni DATOS, así que **no cierra ninguna entrada** |
+| Contraste con la documentación | Todos los ejemplos numéricos de [reglas-de-negocio.md](reglas-de-negocio.md) y de las contradicciones ejecutables coinciden con el código. En la contradicción 12, la tabla §3 no indica el instante de la columna `hoy()`; se reproduce con las 23:30 UTC del 29/03/2026 |
+| Cambios de clasificación | **Ninguno.** Antes, 62 PENDIENTES; después, 67 PENDIENTES (5 entradas nuevas) |
+| Entradas nuevas | **A-63** (ANO-072, ANO-077), **A-64** (ANO-073, ANO-074), **A-65** (ANO-075), **A-66** (ANO-076) y **A-67** (ANO-078) |
+| Entradas cuya evidencia queda ampliada | A-61: ya existen tests de caracterización (la deuda «ningún test» se reduce, la lógica duplicada sigue); A-04 y A-26/A-27: con respuestas de BD entrelazadas, el código asigna el mismo número a dos facturas (test ANO-001, ANO-044, ANO-045); A-25: confirmado que la rectificación de una factura sin líneas no responde, graba la RE y deja la original `emitida` (test ANO-005) |
