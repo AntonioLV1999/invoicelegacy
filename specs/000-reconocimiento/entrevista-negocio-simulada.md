@@ -419,3 +419,63 @@ suposiciones del consultor), conclusión y lo que queda pendiente.
 4. **Repetir la entrevista con las personas reales**, usando este guion y las respuestas previstas como hipótesis
    que confirmar. Recoger nombre, fecha y respuesta literal en `entrevista-negocio.md`.
 5. Hasta entonces, **no se actualiza ninguna clasificación del registro de anomalías.**
+
+---
+
+## 6. Pendiente para próxima ronda
+
+Elaborado el 16/11/2026, al propagar esta acta al [registro de anomalías](registro-de-anomalias.md)
+(apartado 5.1), al [registro de riesgos](registro-riesgos.md) (R34 a R36) y a la
+[memoria histórica](memoria-historica.md) (H-28 a H-32).
+
+**Resultado de la propagación**: 49 entradas del registro llevan ahora en su evidencia la respuesta prevista,
+marcada como SUPOSICIÓN. **No se cierra ninguna**, porque el acta no aporta testimonio NEGOCIO (§0). Por eso,
+en la próxima ronda hay que hacer **todas** las preguntas de esta acta, y no solo las que quedaron sin respuesta.
+
+### 6.1 Sin respuesta concluyente
+
+Lo que esta acta no resuelve ni siquiera como suposición. Detalla el §4.
+
+| Pregunta | Asunto | Destinatario | Entradas | Además |
+|---|---|---|---|---|
+| 4 | Números repetidos o que faltan desde 2021; qué factura quedó con las líneas a medias | Marga | A-04, A-05 | D-04, D-05 |
+| 11 (2.ª parte) | Qué estaba duplicado en FA-2026-000106, si FA-2026-000107 es idéntica | Marga | A-34 | D-06, D-12 |
+| 12 | Si las facturas de la semilla son reales | Marga | A-15 | D-12 |
+| 14 (2.ª parte) | Prorrateo comercial en febrero y el día 31 | Paco | A-17, A-35 | D-14 |
+| 29 (2.ª parte) | Si la contraseña del buzón sigue activa | Manoli, responsable del proyecto | A-43 | — |
+| 30 (en parte) | Quién da el soporte; versión de Node del servidor | Responsable del proyecto | A-45, A-60 | `node --version` en el servidor |
+
+### 6.2 Respuestas previstas que hay que confirmar
+
+Todas las demás preguntas (1 a 30, salvo las partes del §6.1). Cada respuesta prevista del §2 se lee a la
+persona real como hipótesis y se anota si la confirma, la corrige o la desmiente, con su nombre y la fecha.
+
+| Destinatario | Preguntas |
+|---|---|
+| Puri (gestoría) | 1 y 1 bis (repetirlas: la respuesta fue simulada), 2, 6, 7, 8, 10, 13, 23, 25 y 26 |
+| Paco | 9, 14 (1.ª parte), 16, 17 y 18 |
+| Marga | 3, 5, 11 (1.ª parte), 13, 15, 19, 20, 21, 22, 24, 25, 27 y 28 |
+| Manoli | 29 (1.ª parte) |
+| Responsable del proyecto | 30 (`.gitignore` por escrito, red de la oficina, MySQL y albaranes) y confirmar que Paco decide la política comercial (P-08) |
+
+### 6.3 Preguntas nuevas
+
+Surgen de esta acta. Continúan la numeración del registro (P-66).
+
+| ID | Pregunta | Destinatario | Origen | Entradas |
+|---|---|---|---|---|
+| P-67 | Si la cifra de la pantalla «Informe de IVA» y la de Contaplus no coinciden, ¿cuál manda? ¿Cómo se regularizan los 303 ya presentados? | Puri, con el negocio | Pregunta 1 | A-01; R34, H-28 |
+| P-68 | ¿Se cuadra en algún momento, aunque sea una vez al año (modelo 390, libro de facturas emitidas), el IVA declarado con el de Contaplus? ¿Quién lo hace? | Puri | Pregunta 1 bis | A-01; R34, H-28 |
+| P-69 | Si se confirma que el último mes de un contrato se ha cobrado dos veces, ¿se devuelve a los clientes? ¿Desde qué año y con qué documento (rectificativa caso a caso)? | Paco, con Puri | Preguntas 15 y 21 | A-18, A-30 |
+| P-70 | ¿Puede entregar una copia del requerimiento de la inspección de 2020? Si no hay documento, ¿quién atendió la inspección y qué se acordó? | Puri (gestoría) y Paco | Pregunta 9 | A-05, A-07, A-08; R35, H-32 |
+| P-71 | Cuando registra una baja con fecha futura y hace en ese momento la factura del último mes, ¿qué fecha le pone y qué días cobra? | Marga | Preguntas 15 y 21 | A-29, A-30; H-29 |
+| P-72 | Los abonos parciales con una FA en negativo: ¿desde cuándo se hacen, cuántos hay al año y cómo los distingue la gestoría en Contaplus de una venta? | Marga y Puri | Pregunta 13 | A-23, A-28; H-30 |
+| P-73 | Cuando se devuelve por transferencia una factura cobrada, ¿dónde queda constancia del cobro y de la devolución? ¿Quién la autoriza? | Marga | Pregunta 25 | A-39; R36, H-31 |
+| P-74 | ¿Cuándo puede hacerse la entrevista real y quién asistirá? ¿Puede la gestoría traer un CSV real recibido (D-07) y el requerimiento de 2020 (P-70)? | Responsable del proyecto | §5 | Todas |
+
+### 6.4 Estado de la lista PENDIENTE
+
+**No está vacía: tiene 62 entradas (A-01 a A-62), las mismas que antes de esta acta.** La agenda de la
+siguiente conversación con el negocio es el apartado 3 del registro de anomalías (preguntas por interlocutor y
+consultas D-01 a D-31) junto con los §6.1 a §6.3 de esta acta. El reconocimiento **no está listo** para pasar a
+specs formales.

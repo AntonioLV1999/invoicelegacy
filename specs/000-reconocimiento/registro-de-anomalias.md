@@ -7,7 +7,7 @@
 | Fuentes consolidadas | [Mapa del sistema](mapa-sistema.md) (ANO-001 a 031, P-01 a 12), [ciclo de vida de una factura](flujo-factura.md) (ANO-032 a 042, P-13 a 16), [registro de riesgos](registro-riesgos.md) (R1 a R33, ANO-043 a 056, P-17 a 20), [memoria histórica](memoria-historica.md) (H-01 a H-27, ANO-057 y 058, P-21 a 41), [reglas de negocio](reglas-de-negocio.md) (RN-01 a RN-55, ANO-059 a 066, P-42 a 47) y las 14 contradicciones (`contradiccion-01` a `contradiccion-14`; ANO-067 a 071, P-48 a 58) |
 | Fuentes pedidas que **no existen** | `entrevista-negocio.md` y cualquier resultado de arqueología de datos. Búsqueda de ficheros con «entrevista», «arqueolog» o «anomal» en todo el repositorio, sin resultados (16/11/2026). `datos/` solo contiene `migracion_mysql_2018.sql` |
 | Datos reales consultados | **Ninguno.** No hay copia de `datos/gesfact.db` de producción |
-| Testimonios del negocio recogidos | **Ninguno** |
+| Testimonios del negocio recogidos | **Ninguno.** El [acta simulada del 16/11/2026](entrevista-negocio-simulada.md) se propagó el 16/11/2026, pero no aporta testimonio: ninguna persona de la empresa participó (acta §0). Ver apartado 5 |
 | Alcance | Consolidación y clasificación. No se corrige nada (Principios I y III de la constitución) |
 
 ---
@@ -20,6 +20,11 @@
 todavía no se ha entrevistado a nadie ni se ha examinado una copia de la base de datos de producción. El
 apartado 3 es, por tanto, la agenda de la próxima conversación con el negocio y de la primera sesión de
 arqueología de datos.
+
+**Actualización del 16/11/2026.** Se propagó al registro el [acta simulada](entrevista-negocio-simulada.md).
+Sus respuestas son suposiciones del consultor o testimonio simulado, así que no cuentan como testigo NEGOCIO.
+**No se cierra ninguna entrada: siguen 62 PENDIENTES.** Cada entrada afectada lleva ahora en su evidencia la
+respuesta prevista, marcada como SUPOSICIÓN. El apartado 5 registra la revisión entrada por entrada.
 
 ### 0.2 Los tres testigos
 
@@ -101,6 +106,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     de 647,98 € en el informe y de 783,78 € en el CSV (**+135,80 €**). La base difiere en 47,75 €.
   - DATOS: sin veredicto. Lo daría **D-01**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 1 y 1 bis; Puri (simulada por el responsable del proyecto)): respuesta prevista: el 303 se presenta con la cifra de la pantalla (suma por líneas) y nunca se cruza con Contaplus. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: sumar desde las líneas es intencional (comentario
   `routes/informes.js:21-22`). La divergencia sería BUG HISTÓRICO CON DEPENDIENTES si D-01 encuentra
   descuadres en producción, y solo un riesgo latente si no los encuentra.
@@ -126,6 +132,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     sale 205,81 € línea a línea y 205,80 € sobre la base total.
   - DATOS: sin veredicto. Lo daría **D-02** (líneas que no siguen este cálculo, incluidas las de 2019).
   - NEGOCIO: sin testimonio. El comentario atribuye la exigencia a la gestoría, pero eso cuenta como CÓDIGO.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 6; Puri (simulada por el consultor)): respuesta prevista: Contaplus exige el IVA como suma de cuotas redondeadas por línea. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**, candidata a INTENCIONAL (1 de 3 testigos).
   - Desbloquea: **P-30** y **P-25**, reformuladas para Puri: «¿Confirma que Contaplus exige que el IVA de cada
     factura sea la suma de las cuotas redondeadas línea a línea? ¿Qué trimestre devolvió en mayo de 2019 por
@@ -149,6 +156,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     de 2027.
   - DATOS: sin veredicto. Lo daría **D-03**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 2; Puri (simulada por el consultor)): respuesta prevista: el número debe llevar el año de la fecha de la factura, sin renumerar lo emitido. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG HISTÓRICO CON DEPENDIENTES. Si se ha seguido el
   procedimiento del script desde 2021, hay cinco cambios de año afectados (2021 a 2025).
   - Desbloquea: **P-06** (Marga): «¿Qué número recibieron las facturas de la remesa de diciembre lanzada el 1 de
@@ -174,6 +182,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     vuelto a pasar (creo)».
   - DATOS: sin veredicto. Lo daría **D-04**.
   - NEGOCIO: sin testimonio (lo del comentario no está confirmado).
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 4; Marga (simulada por el consultor)): respuesta prevista: no ha revisado la serie; «no ha vuelto a pasar, que yo sepa». Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG HISTÓRICO CON DEPENDIENTES, si las facturas
   duplicadas de 2021 siguen en la BD.
   - Desbloquea: **P-32** (Marga): «El 2 de enero de 2021 salieron dos facturas con el mismo número: ¿cuál era,
@@ -197,6 +206,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - DATOS: sin veredicto. Lo darían **D-01** (facturas sin líneas o con líneas que no suman) y **D-05**
     (huecos).
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 4; Marga (simulada por el consultor)): respuesta prevista: no ha revisado la serie. Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG HISTÓRICO CON DEPENDIENTES si D-05 encuentra huecos,
   que ya serían visibles para la gestoría y para una inspección.
   - Desbloquea: **P-38** (Marga): «¿Qué factura se quedó con las líneas a medias, qué se cambió a mano en la BD y
@@ -218,6 +228,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     «ERROR cuota duplicada» (`db.js:156`), pero no consta que sea de producción (A-34).
   - DATOS: sin veredicto. Lo daría **D-06**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 11; Marga (simulada por el consultor)): respuesta prevista: relanzar un mes ya facturado debe avisar y no facturar sin confirmación. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS. Nadie depende de una cuota duplicada, pero
   hay que confirmar que las que existan ya se rectificaron.
   - Desbloquea: **P-20** (Marga): «¿Se ha interrumpido o lanzado dos veces alguna remesa? ¿Qué se hizo
@@ -238,6 +249,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     sin resultados (16/11/2026).
   - DATOS: sin veredicto. **D-05**: los huecos anteriores a 2020 indicarían borrados.
   - NEGOCIO: sin testimonio. No consta qué organismo hizo la inspección.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 9; Paco (simulado por el consultor)): respuesta prevista: la inspección de 2020 fue de la Agencia Tributaria; hay un requerimiento en la gestoría: no borrar facturas. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**, candidata a INTENCIONAL (1 de 3).
   - Desbloquea: **P-31** (Paco, o quien atendiera la inspección): «¿Qué organismo hizo la inspección de 2020 y
     qué detectó? ¿Hay un acta o requerimiento con obligaciones que el programa deba cumplir?», junto con
@@ -257,6 +269,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `lib/numeracion.js:3-4,14-28,38-42`; `db.js:77-81`.
   - DATOS: sin veredicto. Lo daría **D-05**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 2 y 9; Puri y Paco (simulados por el consultor)): respuesta prevista: numeración correlativa sin huecos por serie y año, exigida en la inspección de 2020. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**, candidata a INTENCIONAL (1 de 3).
   - Desbloquea: **P-31**, más esta pregunta a Puri: «¿El formato FA o RE-AAAA-NNNNNN, con numeración
     independiente por serie y año, es el que dieron por bueno la gestoría y la inspección?» (amplía P-48).
@@ -276,6 +289,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `routes/informes.js:32-51`; `config.js:36-37`. Este documento no reproduce el valor de la clave.
   - DATOS: sin veredicto. Lo daría **D-07**: un CSV real que haya recibido la gestoría.
   - NEGOCIO: sin testimonio. «Acordado con Puri en 2019» es un comentario.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 10; Puri (simulada por el consultor)): respuesta prevista: Contaplus importa el CSV tal cual; cualquier cambio de formato lo rompe; no hay especificación escrita. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**, candidata a INTENCIONAL (1 de 3).
   - Desbloquea: **P-28** (Puri): «¿Hay un documento con el formato del CSV acordado en 2019? ¿Contaplus lo
     importa directamente? ¿Qué pasaría si cambiara una columna o el orden?», junto con **D-07**.
@@ -295,6 +309,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     un IVA de 20,62 € que no cuadra con sus líneas, que suman 20,06 € (`db.js:156-162`).
   - DATOS: sin veredicto. Lo daría **D-08**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 7; Puri (simulada por el consultor)): respuesta prevista: la rectificativa es siempre espejo exacto, seguida de una factura nueva correcta. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**, candidata a INTENCIONAL (1 de 3).
   - Desbloquea: **P-39** (Puri): «¿Se admiten rectificativas parciales? Si la original estaba mal calculada, ¿la
     rectificativa debe seguir siendo su espejo exacto?», junto con **D-08**.
@@ -313,6 +328,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `routes/facturas.js:141-143`; `lib/util.js:10-15`.
   - DATOS: sin veredicto. Lo daría **D-09**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 8; Puri (simulada por el consultor)): respuesta prevista: la rectificativa se declara en el periodo en que se emite. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. El código no da ninguna pista sobre la intención.
   - Desbloquea: **P-43** (Puri): «Cuando se rectifica una factura de un trimestre o un año ya cerrado, ¿la
     rectificativa debe ir con la fecha del día o con otra? ¿Cómo lo trata Contaplus?», junto con **D-09**.
@@ -330,6 +346,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `LEEME.txt:18` (es un procedimiento, no código).
   - DATOS: sin veredicto. Lo daría **D-10**, una prueba de restauración.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 3; Marga (simulada por el consultor)): respuesta prevista: no hay más copia que la del pendrive de los viernes. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS (nadie depende de que la copia sea semanal).
   - Desbloquea: **P-19** (Marga): «¿La copia de los viernes se hace con el programa cerrado? ¿Se ha intentado
     alguna vez restaurar una copia?», junto con **D-10**. También **P-40**: quién la hace cuando ella no está.
@@ -349,6 +366,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     (13/11/2026).
   - DATOS: sin veredicto. Lo daría **D-10** (`PRAGMA integrity_check` sobre una copia).
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 5; Marga (simulada por el consultor)): respuesta prevista: BD en la carpeta compartida del servidor; dos puestos graban; no sabe cuál de las dos rutas es la buena. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS (riesgo).
   - Desbloquea: **P-01** (Marga): «¿En qué equipo y carpeta está físicamente `gesfact.db`? ¿Se arranca
     `server.js` en un puesto o en varios?»; **P-26** (Marga): «En 2018, al pasar a SQLite, ¿se perdieron
@@ -369,6 +387,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `config.js:20`; `db.js:11-15,83-87,93-180`; `db.js:176`.
   - DATOS: sin veredicto. Lo daría **D-11** (buscar otros `gesfact.db` en los equipos).
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 5; Marga (simulada por el consultor)): respuesta prevista: dos puestos graban y la remesa se lanza el día 1 desde su ordenador. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS en producción.
   - Desbloquea: **P-01** y **P-40** (Marga): «¿Desde qué carpeta arranca el acceso directo? ¿Cuál es la ruta
     real del programa?», junto con **D-11**.
@@ -390,6 +409,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `db.js:91-92,122-171`; mapa del sistema, apéndice A; contradicción 03 §3.1.
   - DATOS: sin veredicto. Lo daría **D-12** (buscar esas facturas en producción).
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 12; Marga (simulada por el consultor)): respuesta prevista: no sabe si la semilla son facturas reales; la preparó Julián. Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: si están en producción, BUG HISTÓRICO CON DEPENDIENTES
   (facturas emitidas que no cuadran). Si no, ACCIDENTAL (datos de ejemplo mal hechos).
   - Desbloquea: **P-05** (Marga y Puri): «¿Las facturas FA-2026-000101 a 000108 y RE-2026-000001 existen en
@@ -416,6 +436,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     §3).
   - DATOS: sin veredicto. Lo daría **D-13**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 19; Marga (simulada por el consultor)): respuesta prevista: no teclea importes de 1.000 € o más. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS. Nadie quiere un importe mil veces menor; las
   facturas emitidas así se habrán rectificado (hay que confirmarlo).
   - Desbloquea: **P-13** (Marga): «¿Se escribe alguna vez el punto de miles al teclear? ¿Se ha visto alguna
@@ -440,6 +461,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     9,67 € en una cuota de 145 € (contradicción 01 §3).
   - DATOS: sin veredicto. Lo daría **D-14**.
   - NEGOCIO: sin testimonio. El comentario dice «así lo espera la gestoría», pero eso cuenta como CÓDIGO.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 14; Paco (simulado por el consultor)): respuesta prevista: prorrateo a 30 días; febrero y el día 31 sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: una de las dos fórmulas es INTENCIONAL y la otra, BUG
   HISTÓRICO CON DEPENDIENTES (cuotas parciales emitidas desde 2021).
   - Desbloquea: **P-04** (Puri): «¿Qué prorrateo espera la gestoría para las cuotas: mes de 30 días o días
@@ -464,6 +486,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     base por 15 días de servicio (contradicción 01 §3.2).
   - DATOS: sin veredicto. Lo daría **D-15**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 15; Marga (simulada por el consultor)): respuesta prevista: hace siempre la factura del último mes a mano y no sabía que la remesa también lo cobra. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG HISTÓRICO CON DEPENDIENTES, si la oficina sigue el
   procedimiento de la pantalla.
   - Desbloquea: **P-03** (Marga): «Al dar de baja un contrato a mitad de mes, ¿se emite a mano la factura del
@@ -486,6 +509,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     `FA-2026-000111` por 108,90 € (contradicción 10 §3).
   - DATOS: sin veredicto. Lo daría **D-19**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 20; Marga (simulada por el consultor)): respuesta prevista: al dar de baja un cliente deben darse de baja sus contratos; no le consta ningún caso. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS, salvo que haya contratos que deban seguir
   vivos después de la baja del cliente.
   - Desbloquea: **P-55** (Marga): «Cuando se da de baja a un cliente con contratos, ¿se dan de baja también sus
@@ -507,6 +531,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `routes/facturas.js:55-56`. Ejemplo: una fila de 50 € sin descripción no se factura (RN-17).
   - DATOS: **imposible**, porque lo descartado nunca se graba. Se aplica la excepción del apartado 0.3.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 22; Marga (simulada por el consultor)): respuesta prevista: el programa debe avisar y no grabar. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE** (se cierra con CÓDIGO y NEGOCIO). Hipótesis: BUG A SECAS.
   - Desbloquea: **P-47** (Marga): «¿Se ha dado el caso de teclear una línea con precio pero sin descripción?
     ¿Se revisa la factura impresa antes de enviarla?».
@@ -526,6 +551,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     (**−181,49 €**) (reglas, apéndice A, caso 5).
   - DATOS: sin veredicto. Lo daría **D-16**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 16; Paco (simulado por el consultor)): respuesta prevista: descuento sobre toda la base; el salto es conocido y aceptado. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. El comentario «a partir de 1.000» encaja con las dos lecturas.
   - Desbloquea: **P-45** (Paco): «El descuento, ¿se aplica a toda la factura al pasar de 1.000 € o solo a lo que
     pasa del umbral? ¿Se sabe que con 1.000,01 € el cliente paga menos que con 1.000 €?», junto con **D-16**.
@@ -546,6 +572,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     1.200 € → precio de 1.176,00 € y total de 1.484,11 € (reglas, apéndice A, caso 9).
   - DATOS: sin veredicto. Lo daría **D-16**, agrupando por cliente.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 17; Paco (simulado por el consultor)): respuesta prevista: el descuento se aplica a cualquier cliente que supere el umbral. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-24** (Paco): «¿Sigue vigente el descuento por volumen de 2018? ¿Es solo para hostelería?»,
     junto con **D-16**.
@@ -568,6 +595,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     Barrido: el 8,85 % de las líneas al 10 % difieren en un céntimo.
   - DATOS: sin veredicto. Lo daría **D-18**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 13; Marga y Puri (simuladas por el consultor)): respuesta prevista: los abonos parciales se hacen con FA en negativo y deben respetar el descuento cobrado. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG HISTÓRICO CON DEPENDIENTES, si la oficina abona con
   líneas negativas.
   - Desbloquea: **P-17** (Marga): «¿Se meten alguna vez líneas con cantidad o precio negativos en una factura
@@ -589,6 +617,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     de 145 € o menos (`db.js:116-119`).
   - DATOS: sin veredicto. Lo daría **D-17**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 18; Paco (simulado por el consultor)): respuesta prevista: las cuotas no deben llevar descuento; ninguna llega hoy a 1.000 €. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Si D-17 sale vacía, el riesgo es latente.
   - Desbloquea: **P-14** (Paco y Marga): «¿El descuento debe aplicarse también a las cuotas de la remesa? ¿Hay
     o ha habido contratos de más de 1.000 € al mes?», junto con **D-17**.
@@ -658,6 +687,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     −60,50 € (registro de riesgos, apéndice A, caso 3). Qué graba `sqlite3` con un `NaN` sigue sin comprobar.
   - DATOS: sin veredicto. Lo daría **D-18**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 13; Marga (simulada por el consultor)): respuesta prevista: teclea cantidades negativas para abonos parciales. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: si las líneas negativas se usan a propósito, son una
   práctica INTENCIONAL de hecho y con dependientes (A-23). El `NaN` sería BUG A SECAS.
   - Desbloquea: **P-17** (Marga) y **D-18**.
@@ -677,6 +707,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     y cuota de 90 € → **−26,13 €** de base (contradicción 01 §3.2).
   - DATOS: sin veredicto. Lo daría **D-20**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 21; Marga (simulada por el consultor)): respuesta prevista: registra bajas con fecha futura y hace la factura del último mes al registrarlas. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS.
   - Desbloquea: **P-56** (Marga) y **P-65**, junto con **D-20**.
 - **Dependientes**: nadie identificado.
@@ -696,6 +727,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     Ejecutado: el contrato 1, con baja el 15/12/2026, se facturó completo en noviembre (`FA-2026-000109`).
   - DATOS: sin veredicto. Lo daría **D-20**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 21; Marga (simulada por el consultor)): respuesta prevista: registra bajas con fecha futura y hace la factura del último mes al registrarlas. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: lo accidental es la pantalla; la remesa calcula bien la
   vigencia.
   - Desbloquea: **P-56** (Marga): «¿Se da de baja alguna vez un contrato con fecha futura? En ese caso, ¿la
@@ -761,6 +793,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     descuento»). Recalculada con el código actual, FA-2026-000103 suma 1.000,02 € y **sí** lleva el 2 %.
   - DATOS: sin veredicto. Lo daría **D-16**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 16; Paco (simulado por el consultor)): respuesta prevista: descuento sobre toda la base con «estrictamente mayor que»; el caso de 1.000 € justos es conocido. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: RN-11 candidata a INTENCIONAL (1 de 3) y RN-12,
   ACCIDENTAL.
   - Desbloquea: **P-24** y **P-45** (Paco), más esta pregunta a Puri: «¿Confirma que una base de 1.000,00 €
@@ -781,6 +814,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `db.js:156-158,164-166`.
   - DATOS: sin veredicto. Lo darían **D-12** y **D-06** (facturas de abril de 2026 del Bar Nuevo Siglo).
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 11; Marga (simulada por el consultor)): respuesta prevista: no recuerda qué estaba duplicado en FA-2026-000106. Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-36** (Marga): «¿Qué estaba duplicado? ¿Se lanzó dos veces la remesa de abril? ¿Hay otra
     factura de abril de 2026 para el Bar Nuevo Siglo?», junto con D-12 y D-06.
@@ -800,6 +834,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     (reglas, apéndice A, caso 12).
   - DATOS: sin veredicto. Lo daría **D-14**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 14; Paco (simulado por el consultor)): respuesta prevista: no recuerda con certeza cómo trataba febrero. Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS, o con dependientes si hay bajas en febrero
   facturadas así.
   - Desbloquea: **P-21** (Paco): «¿Cómo trataba febrero cuando prorrateaba a mano? ¿Cobraba (cuota / 30) × días
@@ -821,6 +856,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     frente a 566,44 € aplicando el 2 % a la base de la línea (reglas, apéndice A, caso 6).
   - DATOS: sin veredicto. Lo daría **D-23**.
   - NEGOCIO: sin testimonio. «Para que la gestoría lo vea desglosado» es un comentario.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 24; Marga (simulada por el consultor)): respuesta prevista: los precios se teclean siempre con dos decimales; ninguna queja. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-25** (Puri): «El programa rebaja el precio unitario de cada línea, lo redondea y recalcula
     la línea. ¿Es así como pidió en 2018 ver el descuento desglosado?», junto con **D-23**.
@@ -839,6 +875,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `lib/util.js:2-7`; reglas, apéndice A, casos 1 y 2.
   - DATOS: sin veredicto. Lo daría **D-02**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 6; Puri (simulada por el consultor)): respuesta prevista: Contaplus exige la suma de cuotas redondeadas por línea. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG HISTÓRICO CON DEPENDIENTES. Es incorrecto
   aritméticamente, pero es lo que «cuadra hoy con la gestoría» según `services/calculo.js:3-6`.
   - Desbloquea: **P-46** (Puri y Marga): «¿Se han detectado diferencias de un céntimo en abonos hechos con
@@ -863,6 +900,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     §3).
   - DATOS: sin veredicto. Lo daría **D-24**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 23; Puri (simulada por el consultor)): respuesta prevista: hoy solo 21/10/4 con recargos 5,2/1,4/0,5; nunca se ha reabierto un ejercicio del Access; conservar los antiguos no molesta. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: los tipos antiguos son INTENCIONALES (1 de 3) y el recargo
   0 para tipos desconocidos es ACCIDENTAL.
   - Desbloquea: **P-22** (Paco y Puri): «¿Se ha reabierto alguna vez un ejercicio antiguo con IVA del 16, 18, 7
@@ -886,6 +924,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     dos pestañas lleva a ANO-034 sin preparar ninguna petición (contradicción 14 §3).
   - DATOS: sin veredicto. Lo daría **D-26**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 25; Marga y Puri (simuladas por el consultor)): respuesta prevista: una cobrada debe poder rectificarse sin perder la constancia del cobro; la devolución se hace por transferencia fuera del programa. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-16** (Marga y Puri): «Cuando se rectifica una factura cobrada, ¿cómo se controla la
     devolución?»; **P-58** (Marga y Puri): «¿Hay que poder rectificar una factura cobrada? ¿Tiene sentido
@@ -908,6 +947,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     (contradicción 07 §3.1).
   - DATOS: sin veredicto. Lo daría **D-13** (precios con más de dos decimales).
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 24; Marga (simulada por el consultor)): respuesta prevista: precios siempre con dos decimales. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: ACCIDENTAL.
   - Desbloquea: **P-52** (Marga y Puri): «¿Se teclean precios unitarios con más de dos decimales? ¿Ha protestado
     algún cliente porque cantidad × precio no da la base impresa?», junto con **D-13**.
@@ -927,6 +967,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     facturas pendientes, 3.032,85 € en el panel y 2.910,62 € en el listado (contradicción 04 §3).
   - DATOS: sin veredicto. Lo daría **D-26**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 25; Marga (simulada por el consultor)): respuesta prevista: usa el importe pendiente; una rectificativa no es algo pendiente de cobrar. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: ACCIDENTAL.
   - Desbloquea: **P-50** (Marga): «En el panel, ¿qué cifra usa para saber lo que queda por cobrar? ¿Sabía que el
     número incluye las rectificativas y el importe no?», junto con **D-26**.
@@ -946,6 +987,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     `routes/clientes.js:24`. Solo se puede provocar tocando la BD (contradicción 09 §4).
   - DATOS: sin veredicto. Lo daría **D-25**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 26; Puri (simulada por el consultor)): respuesta prevista: la factura reimpresa debe salir con los datos de la emisión. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: ACCIDENTAL.
   - Desbloquea: **P-54** (Marga y Puri): «¿Algún cliente ha entrado o salido del recargo después de tener
     facturas? ¿Cómo se cambió? Al reimprimir, ¿qué debería decir?»; **P-07**; y **D-25**.
@@ -967,6 +1009,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     Este documento no reproduce los valores.
   - DATOS: no aplica.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 29; Manoli (simulada por el consultor)): respuesta prevista: no sabe si se cambió la contraseña del buzón. Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS (riesgo de seguridad).
   - Desbloquea: **P-18** (responsable del proyecto y Manoli): «¿El repositorio de GitHub es privado? ¿Quién
     tiene acceso? ¿La contraseña del buzón sigue activa o se usa en otro servicio?».
@@ -988,6 +1031,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `server.js:16-18,38-42,49`.
   - DATOS: no aplica.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 5 y 30; Marga y responsable del proyecto (simulados por el consultor)): respuesta prevista: dos puestos; uso solo desde la red de la oficina. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS.
   - Desbloquea: **P-60** (nueva, Marga y responsable del proyecto): «¿Desde qué ordenadores se entra en GesFact?
     ¿Se puede llegar al puerto 3000 desde la wifi de la oficina u otras redes?», y **P-01**.
@@ -1007,6 +1051,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `LEEME.txt:5,7`; `package.json:1-17`; `package-lock.json:4,853-855`.
   - DATOS: no aplica. El veredicto es `node --version` y `npm ls` en el equipo de la oficina.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 30; Responsable del proyecto (simulado por el consultor)): respuesta prevista: no sabe la versión de Node del servidor. Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-02** (Marga o responsable del proyecto): «¿Qué muestra `node --version` en el puesto de la
     oficina?»; **P-11**: «¿Cómo se instaló (con `npm install` o copiando la carpeta con `node_modules`)?»;
@@ -1028,6 +1073,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `services/email.js:3-6,26-28`; `routes/facturas.js:93`; `LEEME.txt:14`.
   - DATOS: no aplica.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 29; Manoli (simulada por el consultor)): respuesta prevista: el envío por correo no se reactiva por ahora. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-34** (Manoli): «¿Qué cambió en Arsys en 2022? ¿Por qué hay que consultarle antes de
     reactivar el correo? ¿Hay planes de volver a enviar facturas desde el programa?».
@@ -1047,6 +1093,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     Hoy coinciden porque los dos valen 30 (contradicción 05 §3).
   - DATOS: sin veredicto. Lo daría **D-27**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 27; Marga (simulada por el consultor)): respuesta prevista: 30 días por defecto; el contado vence el mismo día. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: ACCIDENTAL.
   - Desbloquea: **P-51** (Marga y responsable del proyecto): «En el `config.js` del servidor, ¿qué valores
     tienen `VENCIMIENTO_DIAS` e `IVA_DEFECTO`? ¿Se han cambiado alguna vez?», junto con **D-27**.
@@ -1086,6 +1133,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     acepta (reglas, apéndice A, caso 21).
   - DATOS: sin veredicto. Lo daría **D-28**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 28; Marga (simulada por el consultor)): respuesta prevista: sigue comprobando la letra a ojo; cuando no está, nadie da de alta clientes. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**, candidata a INTENCIONAL como solución provisional (1 de 3).
   - Desbloquea: **P-23** (Marga): «¿Sigue comprobando a mano la letra de cada NIF nuevo? ¿Quién da de alta
     clientes cuando usted no está?», junto con **D-28**.
@@ -1107,6 +1155,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - DATOS: **imposible**, porque la BD no guarda los datos del cliente en la fecha de emisión. Se aplica la
     excepción del apartado 0.3.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 26; Puri (simulada por el consultor)): respuesta prevista: la reimpresión debe llevar los datos del momento de la emisión. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE** (se cierra con CÓDIGO y NEGOCIO).
   - Desbloquea: **P-66** (nueva, Puri): «Al reimprimir una factura antigua, ¿deben salir los datos del cliente y
     de la empresa de la fecha de emisión? ¿Se ha reimprimido alguna después de un cambio de domicilio o de
@@ -1126,6 +1175,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `views/factura_detalle.ejs:10-14,27,32,37-43,47-52`.
   - DATOS: no aplica. Lo que pide la norma es una **SUPOSICIÓN**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 26; Puri (simulada por el consultor)): respuesta prevista: la rectificativa debe titularse «FACTURA RECTIFICATIVA». **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-10** (Puri): «¿Basta con "Rectifica a: …" o la rectificativa debe titularse expresamente
     "factura rectificativa"?».
@@ -1144,6 +1194,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `routes/informes.js:43-45`; `routes/clientes.js:21-22`.
   - DATOS: sin veredicto. Lo daría **D-29**.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 10; Puri (simulada por el consultor)): respuesta prevista: no cambiar nada del formato del CSV, tampoco el escape del `;`, sin avisar a la gestoría y probarlo con ella. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS.
   - Desbloquea: **P-28** (Puri), junto con **D-29**.
 - **Dependientes**: la gestoría (A-09).
@@ -1254,6 +1305,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: listado de la raíz (13/11/2026 y 16/11/2026).
   - DATOS: no aplica.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 30; Responsable del proyecto (simulado por el consultor)): respuesta prevista: `.gitignore` autorizado (no vale como autorización: hace falta por escrito). **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**. Hipótesis: BUG A SECAS.
   - Desbloquea: **P-18** (visibilidad del repositorio).
 - **Dependientes**: nadie identificado.
@@ -1294,6 +1346,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
     `routes/informes.js:21-22`.
   - DATOS: no aplica.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 30; Responsable del proyecto (simulado por el consultor)): respuesta prevista: no sabe quién da hoy el soporte. Sin respuesta concluyente. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-29** (responsable del proyecto): «¿Quién ha editado el `LEEME.txt` después de 2019? ¿Hay
     otra documentación?»; **P-08** (responsable del proyecto): «¿Quién da soporte ahora que Julián no está?
@@ -1334,6 +1387,7 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
   - CÓDIGO: `datos/migracion_mysql_2018.sql:1-5`; `LEEME.txt:12-16`.
   - DATOS: no aplica.
   - NEGOCIO: sin testimonio.
+  - NEGOCIO, acta simulada del 16/11/2026 ([entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), pregunta 23 y 30; Puri y responsable del proyecto (simulados por el consultor)): respuesta prevista: MySQL y albaranes abandonados; el Access nunca se ha reabierto. **SUPOSICIÓN: no cuenta como testigo** (acta §0; Principio II). Clasificación sin cambio (apartado 5).
 - **Clasificación final**: **PENDIENTE**.
   - Desbloquea: **P-27** (responsable del proyecto): «¿La migración a MySQL se da por abandonada?»; **P-09** y
     **P-41** (Paco y Marga): «¿Qué tenía que hacer el módulo de albaranes? ¿Se sigue necesitando?»; y **P-22**
@@ -1413,7 +1467,8 @@ Dentro de cada nivel, primero va lo que tiene un importe cuantificado mayor.
 | A-62 | Partes abandonadas | D | PENDIENTE | Sin indicio | Documentar sin especificar | Si siguen vivas (responsable) |
 
 **Recuento**: 62 entradas (15 de nivel A, 17 de B, 10 de C y 20 de D). **PENDIENTES: 62.** INTENCIONAL: 0.
-ACCIDENTAL: 0. BUG HISTÓRICO CON DEPENDIENTES: 0. BUG A SECAS: 0.
+ACCIDENTAL: 0. BUG HISTÓRICO CON DEPENDIENTES: 0. BUG A SECAS: 0. Sin cambios tras la propagación del acta
+simulada del 16/11/2026 (apartado 5).
 
 ---
 
@@ -1427,6 +1482,12 @@ specs formales. Para vaciarla hacen falta dos cosas, y la segunda depende de un 
   porque no hay `.gitignore` (A-58). Las consultas se ejecutan sobre la copia, nunca sobre el fichero de
   producción (Principio I).
 - Las entrevistas del apartado 3.1 y las consultas del apartado 3.2.
+
+**Estado tras el acta simulada del 16/11/2026**: la lista sigue teniendo **62 entradas**. El acta no ha cerrado
+ninguna. Su §2 da una respuesta prevista para cada pregunta, que sirve de hipótesis que confirmar o desmentir,
+y su §6 recoge lo que queda sin respuesta y las preguntas nuevas **P-67 a P-74**, que se han añadido abajo. La
+entrevista tiene que repetirse con las personas reales y quedar en `entrevista-negocio.md`, con nombre, fecha y
+respuesta.
 
 ### 3.1 Preguntas por interlocutor
 
@@ -1454,6 +1515,10 @@ concretado en la entrada correspondiente.
 | **P-59** (nueva, con Marga): ¿importa el orden de numeración de la remesa? | A-54 |
 | **P-64** (nueva, con Marga): ¿cómo se obtienen en enero el 4T y el fichero del año anterior? | A-53 |
 | P-54: leyenda de recargo al reimprimir (con Marga) | A-42, A-50 |
+| **P-67** (nueva, acta simulada; con el negocio): si la pantalla y Contaplus no coinciden, ¿qué cifra manda y cómo se regularizan los 303 ya presentados? | A-01 |
+| **P-68** (nueva, acta simulada): ¿hay algún cuadre, aunque sea anual (390, libro de facturas emitidas), entre el IVA declarado y el de Contaplus? | A-01 |
+| **P-70** (nueva, acta simulada): entregar copia del requerimiento de la inspección de 2020, si existe | A-05, A-07, A-08 |
+| **P-72** (nueva, acta simulada; con Marga): abonos parciales con FA en negativo: ¿desde cuándo, cuántos, cómo los identifica Contaplus? | A-23, A-28 |
 
 **Paco** (**SUPOSICIÓN**: quien decide la política comercial; P-08)
 
@@ -1466,6 +1531,7 @@ concretado en la entrada correspondiente.
 | P-21: ¿cómo prorrateaba febrero y el día 31? | A-17, A-35 |
 | P-44: ¿se cobran el día de alta y el de baja? (con Marga) | A-17 |
 | P-41 y P-09: módulo de albaranes (con Marga) | A-62 |
+| **P-69** (nueva, acta simulada; con Puri): si se confirma el doble cobro del último mes, ¿se devuelve a los clientes y cómo? | A-18, A-30 |
 
 **Marga (administración)**
 
@@ -1492,6 +1558,8 @@ concretado en la entrada correspondiente.
 | P-23: comprobación de la letra del NIF | A-49 |
 | **P-62** (nueva): textos «(N dias)», descuento sin explicación, motivo de la RE | A-55 |
 | **P-60** (nueva, con el responsable del proyecto): puestos y redes con acceso al puerto 3000 | A-44 |
+| **P-71** (nueva, acta simulada): con una baja futura, ¿qué fecha y qué periodo lleva la factura del último mes hecha a mano? | A-29, A-30 |
+| **P-73** (nueva, acta simulada): devoluciones por transferencia fuera del programa: ¿dónde queda constancia y quién las autoriza? | A-39 |
 
 **Manoli**
 
@@ -1513,6 +1581,7 @@ concretado en la entrada correspondiente.
 | **P-61** (nueva): dónde va la salida de la consola | A-59 |
 | **P-63** (nueva): condición de entrada a la modernización | A-61 |
 | Autorizar un `.gitignore` (excepción a la constitución) | A-58 |
+| **P-74** (nueva, acta simulada): fecha y asistentes de la entrevista real; que Puri traiga un CSV real y el requerimiento de 2020 | Todas las entradas |
 
 ### 3.2 Consultas de arqueología de datos
 
@@ -1651,7 +1720,9 @@ A-20, A-43 a A-46, A-50, A-51, A-53, A-56 y A-58 a A-62.
 | 14 · Acciones permitidas | A-39 | | R14 | A-60 | | R31 | A-60, A-47, A-38, A-33 |
 | | | | R15 | A-37 | | R32 | A-14 |
 | | | | R16 | A-61 | | R33 | A-59 |
-| | | | R17 | A-25 | | | |
+| | | | R17 | A-25 | | R34 | A-01 |
+| | | | | | | R35 | A-05, A-07, A-08 |
+| | | | | | | R36 | A-39 |
 
 ### 4.4 Memoria histórica: advertencias «no tocar», discrepancias y cronología
 
@@ -1707,6 +1778,11 @@ A-20, A-43 a A-46, A-50, A-51, A-53, A-56 y A-58 a A-62.
 | H-24 | A-18 |
 | H-25 | A-12 |
 | H-26 | A-61 |
+| H-28 (acta simulada) | A-01 |
+| H-29 (acta simulada) | A-18, A-29, A-30 |
+| H-30 (acta simulada) | A-23, A-28 |
+| H-31 (acta simulada) | A-39 |
+| H-32 (acta simulada) | A-05, A-07, A-08 |
 
 Patrones de la memoria §5: el 1 (concurrencia) está en A-04 y A-13; el 2 («no ha vuelto a pasar») en A-04, A-05
 y A-60; el 3 (la gestoría manda sobre el cálculo) en A-02, A-09, A-10, A-17 y A-36; el 4 (dependencia de Marga)
@@ -1716,4 +1792,94 @@ en P-40, que figura en la agenda; el 5 (documentación) en A-60; el 6 (H-19) en 
 ### 4.5 Preguntas
 
 Las 58 preguntas anteriores (P-01 a P-58) figuran en la agenda del apartado 3.1. Este documento añade **P-59 a
-P-66**.
+P-66**. El acta simulada del 16/11/2026 añade **P-67 a P-74** (acta §6.3), que también están en el apartado 3.1.
+
+---
+
+## 5. Historial de clasificaciones
+
+Las clasificaciones no se sobrescriben. Cada revisión deja aquí, para cada entrada, la clasificación anterior,
+la nueva y el motivo.
+
+### 5.1 Revisión del 16/11/2026: propagación del acta simulada
+
+| Campo | Valor |
+|---|---|
+| Fuente | [entrevista-negocio-simulada.md](entrevista-negocio-simulada.md), acta del 16/11/2026, preguntas 1 a 30 |
+| Quién respondió | Preguntas 1 y 1 bis: el responsable del proyecto en el papel de Puri. Preguntas 2 a 30: el consultor, con «la respuesta más lógica» (acta, cabecera y §0) |
+| Valor como testigo | **Ninguno.** No respondió ninguna persona de Suministros Hidalgo S.L. en su propio nombre. Según el Principio II (`.specify/memory/constitution.md:54-59`) y el apartado 0.2 de este registro, NEGOCIO exige el testimonio de una persona identificada, con fecha. Las respuestas cuentan como **SUPOSICIÓN** y no pueden basar ninguna decisión ni ningún test |
+| Cambios en la evidencia | Se añade a 49 entradas una viñeta «NEGOCIO, acta simulada…» con la pregunta, el interlocutor simulado y la respuesta prevista. La viñeta original «NEGOCIO: sin testimonio» se mantiene |
+| Cambios de clasificación | **Ninguno.** Antes, 62 PENDIENTES; después, 62 PENDIENTES |
+| Entradas nuevas | Ninguna en este registro: lo que el acta revela no tiene evidencia propia. Se anota como SUPOSICIÓN en el [registro de riesgos](registro-riesgos.md) (R34 a R36) y en la [memoria histórica](memoria-historica.md) (H-28 a H-32), vinculado a las entradas A del apartado 4 |
+
+«Si se confirma» es la clasificación que propone el acta (§1) para cuando la persona real dé esa respuesta. Para
+INTENCIONAL bastaría con CÓDIGO y NEGOCIO reales. Para el resto, salvo la excepción del apartado 0.3 (A-20),
+hace falta además la consulta D indicada.
+
+| Entrada | Pregunta del acta | Antes | Después | Motivo | Si se confirma (propuesta del acta) |
+|---|---|---|---|---|---|
+| A-01 | 1, 1 bis | PENDIENTE | PENDIENTE | Testimonio simulado | Según D-01; BUG HISTÓRICO CON DEPENDIENTES si da filas |
+| A-02 | 6 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-03 | 2 | PENDIENTE | PENDIENTE | Suposición | BUG HISTÓRICO CON DEPENDIENTES si D-03 da filas |
+| A-04 | 4 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | Según D-04 |
+| A-05 | 4 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | Según D-05 |
+| A-06 | 11 | PENDIENTE | PENDIENTE | Suposición | BUG A SECAS |
+| A-07 | 9 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL (y documento de la inspección, P-70) |
+| A-08 | 2, 9 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-09 | 10 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-10 | 7 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-11 | 8 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-12 | 3 | PENDIENTE | PENDIENTE | Suposición | BUG A SECAS (riesgo) |
+| A-13 | 5 | PENDIENTE | PENDIENTE | Suposición | BUG A SECAS (riesgo) |
+| A-14 | 5 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta; D-11 |
+| A-15 | 12 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | Según D-12 |
+| A-16 | 19 | PENDIENTE | PENDIENTE | Suposición | BUG A SECAS (latente) |
+| A-17 | 14 | PENDIENTE | PENDIENTE | Suposición; febrero sin respuesta concluyente | Remesa: BUG HISTÓRICO CON DEPENDIENTES |
+| A-18 | 15 | PENDIENTE | PENDIENTE | Suposición | BUG HISTÓRICO CON DEPENDIENTES |
+| A-19 | 20 | PENDIENTE | PENDIENTE | Suposición | BUG A SECAS, salvo que D-19 dé filas |
+| A-20 | 22 | PENDIENTE | PENDIENTE | Suposición. Le basta con CÓDIGO y NEGOCIO (apartado 0.3), pero NEGOCIO falta | BUG A SECAS |
+| A-21 | 16 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-22 | 17 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-23 | 13 | PENDIENTE | PENDIENTE | Suposición | BUG HISTÓRICO CON DEPENDIENTES si D-18 da abonos con descuento |
+| A-24 | 18 | PENDIENTE | PENDIENTE | Suposición | BUG A SECAS (latente) |
+| A-25 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-65) |
+| A-26 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-65) |
+| A-27 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-65) |
+| A-28 | 13 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta; D-18 |
+| A-29 | 21 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta; D-20 |
+| A-30 | 21 | PENDIENTE | PENDIENTE | Suposición | BUG HISTÓRICO CON DEPENDIENTES (con A-18) |
+| A-31 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-38) |
+| A-32 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-20) |
+| A-33 | 16 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL |
+| A-34 | 11 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | Según D-06 y D-12 |
+| A-35 | 14 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | Según Paco y D-14 |
+| A-36 | 24 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta; D-13 |
+| A-37 | 6 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta (va con A-02) |
+| A-38 | 23 | PENDIENTE | PENDIENTE | Suposición | Tipos antiguos: INTENCIONAL; recargo 0: ACCIDENTAL |
+| A-39 | 25 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta; D-26 |
+| A-40 | 24 | PENDIENTE | PENDIENTE | Suposición | ACCIDENTAL |
+| A-41 | 25 | PENDIENTE | PENDIENTE | Suposición | ACCIDENTAL (corregir el número) |
+| A-42 | 26 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta |
+| A-43 | 29 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | — |
+| A-44 | 5, 30 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta |
+| A-45 | 30 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | — |
+| A-46 | 29 | PENDIENTE | PENDIENTE | Suposición | Sin clasificación propuesta; tratamiento: documentar sin especificar |
+| A-47 | 27 | PENDIENTE | PENDIENTE | Suposición | BUG A SECAS en el contado (D-27) |
+| A-48 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-12) |
+| A-49 | 28 | PENDIENTE | PENDIENTE | Suposición | INTENCIONAL, de forma provisional (D-28) |
+| A-50 | 26 | PENDIENTE | PENDIENTE | Suposición | BUG HISTÓRICO CON DEPENDIENTES |
+| A-51 | 26 | PENDIENTE | PENDIENTE | Suposición | BUG HISTÓRICO CON DEPENDIENTES |
+| A-52 | 10 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta; D-29 |
+| A-53 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-64) |
+| A-54 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-59) |
+| A-55 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-62) |
+| A-56 | — | PENDIENTE | PENDIENTE | El acta no la trata (la ruta del servidor sale en la pregunta 5, sin respuesta) | — (P-40) |
+| A-57 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-11, P-35) |
+| A-58 | 30 | PENDIENTE | PENDIENTE | Suposición. La autorización del `.gitignore` tiene que ser real y por escrito | — |
+| A-59 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-61) |
+| A-60 | 30 | PENDIENTE | PENDIENTE | Suposición; sin respuesta concluyente | — |
+| A-61 | — | PENDIENTE | PENDIENTE | El acta no la trata | — (P-63) |
+| A-62 | 23, 30 | PENDIENTE | PENDIENTE | Suposición | Sin propuesta |
+
+**Resultado**: 49 entradas tratadas por el acta, 13 no tratadas, **0 cierres**. Lista PENDIENTE: **62 entradas,
+de A-01 a A-62** (apartado 3).

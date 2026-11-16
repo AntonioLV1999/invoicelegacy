@@ -77,6 +77,22 @@ Ordenada por fecha aproximada. Las entradas sin fecha van al final (H-21 a H-27)
 | H-26 | Sin fecha | ABANDONADO | `routes/facturas.js` «se ha ido haciendo grande, algún día habría que partirlo. "Algún día"» | Julián | `routes/facturas.js:1-3` | Ninguna (deuda técnica, sin decisión de negocio) |
 | H-27 | Sin fecha | PROCEDIMIENTO | «Ante cualquier problema llamar a Julián (ext. 22)», en el pie de todas las pantallas | Julián | `views/pie.ejs:2` | **P-08** (ya existe) |
 
+### 2.1 Ampliación del 16/11/2026: acta simulada
+
+Procedimientos y dependencias que el código no muestra y que aparecen en el
+[acta simulada del 16/11/2026](entrevista-negocio-simulada.md). En el acta no participó ninguna persona de la
+empresa (acta §0), así que estas entradas no son «según el comentario» sino **SUPOSICIÓN** (según el acta):
+pasarán a testimonio cuando la persona real las confirme. **El acta no revela ningún incidente nuevo**: los que
+cita (2018, 2019, 2020, 2021) ya están en H-07, H-12, H-13 y H-14.
+
+| ID | Fecha aprox. | Tipo | Qué se hace (según el acta simulada, **SUPOSICIÓN**) | Quién | Dónde | Pregunta al negocio |
+|---|---|---|---|---|---|---|
+| H-28 | Sin fecha | PROCEDIMIENTO | El modelo 303 se presenta con la cifra de la pantalla «Informe de IVA». Nadie la compara con el IVA que queda en Contaplus después de importar el CSV | Puri (gestoría) | Acta, preguntas 1 y 1 bis (testimonio simulado); `routes/informes.js:14-51` | **P-67**, **P-68**. Riesgo R34 |
+| H-29 | Sin fecha (**SUPOSICIÓN**: desde 2021, como H-24) | PROCEDIMIENTO | La factura del último mes se hace a mano **en el momento de registrar la baja**, también cuando la baja tiene fecha futura. Amplía H-24 | Marga | Acta, preguntas 15 y 21 (suposición) | **P-71**. Relacionada con P-03 y P-56 |
+| H-30 | Sin fecha | PROCEDIMIENTO | Los abonos parciales se hacen con una factura FA con cantidades negativas, porque no hay rectificativa parcial | Marga | Acta, pregunta 13 (suposición); `routes/facturas.js:124-128` | **P-72**. Relacionada con P-17 y P-57 |
+| H-31 | Sin fecha | PROCEDIMIENTO | La devolución de una factura cobrada y rectificada se hace por transferencia, fuera del programa | Marga | Acta, pregunta 25 (suposición) | **P-73**. Riesgo R36 |
+| H-32 | 2020 | DECISIÓN | El requerimiento escrito de la inspección de 2020, de la Agencia Tributaria, estaría en poder de la gestoría. Amplía H-13 | Paco, la gestoría | Acta, pregunta 9 (suposición); `lib/numeracion.js:3-6` | **P-70**. Riesgo R35 |
+
 ---
 
 ## 3. Advertencias «no tocar»
@@ -169,3 +185,6 @@ sustituye al «según el comentario» de su entrada.
 | P-39 | ¿Se admiten rectificativas parciales (por ejemplo, de una sola línea)? Si la original estaba mal calculada, ¿la rectificativa debe seguir siendo su espejo exacto? | Puri (gestoría) | H-22; ANO-005, ANO-020 |
 | P-40 | ¿Cuál es la ruta real del programa en el servidor? ¿Quién copia `config.js` y cuándo lo hizo por última vez? ¿Y quién lanza la remesa, envía las facturas, emite los prorrateos de baja y hace la copia de los viernes cuando Marga no está? | Marga | H-23, H-04, H-16, H-17, H-24, H-25; ANO-058, P-01 |
 | P-41 | ¿Qué tenía que hacer el módulo de albaranes de Roberto? ¿Se sigue necesitando? ¿Cómo se llevan hoy los albaranes? ¿Qué es «la campaña» en la que podría volver Roberto? | Paco y Marga | H-15; P-09 |
+
+Las entradas H-28 a H-32 (apartado 2.1) remiten a las preguntas P-67 a P-73, que están en el §6.3 del
+[acta simulada](entrevista-negocio-simulada.md#63-preguntas-nuevas).

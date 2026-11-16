@@ -73,6 +73,21 @@
 R12, R17, R18, R21, R22), la **falta de transacciones** (R3, R4, R17, R32) y la **entrada de datos sin
 validar** (R5, R6, R11, R22-R25).
 
+### 1.1 Ampliación del 16/11/2026: acta simulada
+
+Riesgos que aparecen al propagar el [acta simulada del 16/11/2026](entrevista-negocio-simulada.md). En el
+acta no participó ninguna persona de la empresa (acta §0), así que la parte de cada riesgo que sale de ella es
+**SUPOSICIÓN** hasta que la confirme la persona real. Van aparte para no alterar el orden por I×P de la tabla
+anterior. Se agrupan en las categorías **[Proceso manual]** y **[Dependencia externa]**, que no estaban en la
+lista original. No llevan `ANO` propio: se vinculan con las entradas del [registro de anomalías](registro-de-anomalias.md)
+que ya existían (apartado 4.3).
+
+| ID | Descripción | Evidencia | Impacto de negocio | Prob. | I×P |
+|---|---|---|---|---|---|
+| R34 | **[Proceso manual]** El 303 se presenta con la cifra de la pantalla «Informe de IVA», que suma las líneas, y Contaplus recibe el CSV, que suma las cabeceras. El programa no las compara y, según el acta, **nadie las compara a mano**. Un descuadre entre el 303 y la contabilidad pasaría sin detectarse. ANO-014 (A-01) | CÓDIGO: `routes/informes.js:14-30` frente a `:32-51`; sobre la semilla, +135,80 € de IVA en 2026 (contradicción 03 §3.2). **SUPOSICIÓN**: acta simulada, preguntas 1 y 1 bis (testimonio simulado de Puri) | **Alto.** Declaraciones de IVA que no cuadran con la contabilidad, sin que nadie lo sepa | media (depende de D-01; P-67, P-68) | 6 |
+| R35 | **[Dependencia externa]** Las obligaciones de la inspección de 2020 (no borrar facturas, numeración sin huecos), que sostienen dos reglas protegidas, estarían en un requerimiento que **guarda la gestoría** y que nadie del proyecto ha visto. Si no existe o dice otra cosa, el alcance legal de A-05, A-07 y A-08 no se puede fijar | CÓDIGO: `lib/numeracion.js:3-6`. **SUPOSICIÓN**: acta simulada, pregunta 9 (Paco simulado) | **Alto.** Una spec formal podría omitir una obligación legal o inventarse una | media (P-70) | 6 |
+| R36 | **[Proceso manual]** Las devoluciones de facturas cobradas se harían **por transferencia, fuera del programa**. Como al rectificar una cobrada se pierde la constancia del cobro, en GesFact no queda rastro de qué se cobró ni de qué se devolvió. ANO-006, ANO-033, ANO-034 (A-39) | CÓDIGO: `routes/facturas.js:117-122,132-133,154`. **SUPOSICIÓN**: acta simulada, pregunta 25 (Marga y Puri simuladas) | **Medio.** Conciliación de cobros y devoluciones a mano, fuera del sistema | media (P-73) | 4 |
+
 ---
 
 ## 2. Hallazgos nuevos para el registro de anomalías (propuestos)
@@ -108,6 +123,9 @@ Continúan la numeración de los documentos anteriores (P-01 a P-16).
 | P-18 | ¿El repositorio de GitHub es privado? ¿Quién tiene acceso? ¿La contraseña del buzón de facturas sigue activa o se usa en algún otro servicio? | Responsable del proyecto y Manoli (`config.js:27-28`) | R9 |
 | P-19 | ¿La copia de los viernes se hace con el programa cerrado? ¿Se ha intentado alguna vez restaurar una copia? | Marga | R20 |
 | P-20 | ¿Se ha interrumpido o lanzado dos veces alguna remesa? ¿Qué se hizo entonces? | Marga | R4 |
+| P-67, P-68 | Preguntas nuevas del acta simulada (§6.3): qué cifra manda si la pantalla y Contaplus difieren, y si existe algún cuadre manual | Puri (con el negocio) | R34 |
+| P-70 | Pregunta nueva del acta simulada (§6.3): copia del requerimiento de la inspección de 2020 | Puri / Paco | R35 |
+| P-73 | Pregunta nueva del acta simulada (§6.3): dónde queda constancia de las devoluciones por transferencia | Marga | R36 |
 | — | Verificaciones técnicas pendientes, sobre una BD temporal o un equipo con zona horaria configurable: (1) tiempo de espera ante bloqueos por defecto de `sqlite3` 5.1.7 (R19); (2) si Express 4.22 usa `qs` para la query string (R26); (3) `sumarDias` con una zona horaria al oeste de UTC (R27; en Windows la variable `TZ` con nombres IANA no surtió efecto el 13/11/2026); (4) qué graba `sqlite3` con `NaN` (R6, ya pendiente en el ciclo de vida) | Equipo de documentación (no es una pregunta al negocio) | R6, R19, R26, R27 |
 
 ---
